@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package coronaapp;
+import coronaapp.View.*;
 
 /**
  *
@@ -17,6 +18,8 @@ public class CoronaApp {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.print("Hey\n");
+        System.out.println("Por favor funciona");
+        Login login = new Login();        
     }
     
 }
