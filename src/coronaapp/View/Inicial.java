@@ -203,13 +203,16 @@ public class Inicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         } else {
             // Com base na checkBox cria um novo paciente ou equipe médica
-            if(checkEquipeMedica.isSelected()){
+            if (checkEquipeMedica.isSelected()) {
                 // Enviar dados para equipe médica
                 JOptionPane.showMessageDialog(rootPane, "Equipe médica");
+                new Menu(true).setVisible(true);
             } else {
                 // Enviar dados para paciente
                 JOptionPane.showMessageDialog(rootPane, "Paciente");
+                new Menu(false).setVisible(true);
             }
+            this.setVisible(false);
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
