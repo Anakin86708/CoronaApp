@@ -16,10 +16,8 @@ public class CoronaApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.print("Hey\n");
-        System.out.println("Por favor funciona");
-        Login login = new Login();        
+        // Chama o form de login
+        new Inicial().setVisible(true);
     }
     
 }
