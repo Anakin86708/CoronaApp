@@ -118,7 +118,11 @@ public class Inicial extends javax.swing.JFrame {
 
         jLabel11.setText("Senha:");
 
-        jPasswordSenha.setText("jPasswordField1");
+        jPasswordSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordSenhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -272,7 +276,7 @@ public class Inicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        if ("".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtPais.getText())) {
+        if ("".equals(txtCpf.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtPais.getText()) || "".equals(txtNome.getText()) || "".equals(txtEmail.getText()) || "".equals(txtCpf.getText()) || "".equals(txtTelefone.getText()) ) {
             JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         } else {
             // Com base na checkBox cria um novo paciente ou equipe médica
@@ -292,6 +296,10 @@ public class Inicial extends javax.swing.JFrame {
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void jPasswordSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordSenhaActionPerformed
 
     /**
      * @param args the command line arguments
