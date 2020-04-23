@@ -17,7 +17,9 @@ public class CoronaApp {
      */
     public static void main(String[] args) {
         // Chama o form de login
-        new Inicial().setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
     
 }
