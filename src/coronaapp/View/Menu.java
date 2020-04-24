@@ -123,6 +123,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnVerificarHistoricoPaciente.setText("Verificar histórico médico");
+        btnVerificarHistoricoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarHistoricoPacienteActionPerformed(evt);
+            }
+        });
 
         btnAtualizarCadastroPaciente.setText("Atualizar cadastro");
         btnAtualizarCadastroPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +175,11 @@ public class Menu extends javax.swing.JFrame {
         btnMarcarVisita.setText("Marcar visita");
 
         btnHistoricoMedico.setText("Verificar histórico médico");
+        btnHistoricoMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoricoMedicoActionPerformed(evt);
+            }
+        });
 
         btnGerarRelatorio.setText("Gerar relatório");
 
@@ -267,6 +277,20 @@ public class Menu extends javax.swing.JFrame {
         mensagens.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnMensagensActionPerformed
+
+    private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
+        Historico historico = new Historico();
+        historico.setVisible(true);
+        historico.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHistoricoMedicoActionPerformed
+
+    private void btnVerificarHistoricoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarHistoricoPacienteActionPerformed
+        Historico historico = new Historico();
+        historico.setVisible(true);
+        historico.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVerificarHistoricoPacienteActionPerformed
 
     /**
      * @param args the command line arguments

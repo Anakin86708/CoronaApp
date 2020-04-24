@@ -181,6 +181,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Verificar hist&#xf3;rico m&#xe9;dico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerificarHistoricoPacienteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAtualizarCadastroPaciente">
               <Properties>
@@ -250,6 +253,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Verificar hist&#xf3;rico m&#xe9;dico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistoricoMedicoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnGerarRelatorio">
               <Properties>
