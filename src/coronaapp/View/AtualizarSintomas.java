@@ -5,7 +5,7 @@
  */
 package coronaapp.View;
 
-import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,8 +76,8 @@ public class AtualizarSintomas extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(titleLabel))
                     .addGroup(topPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30)
+                        .addComponent(btnVoltar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -99,6 +99,11 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         btnEditar.setText("Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAdicionar.setText("Adicionar");
 
@@ -160,6 +165,18 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         btnEditar.setEnabled(true);
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_listSintomasMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int selecionado = listSintomas.getSelectedIndex();
+        if (selecionado != -1) {
+            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagens selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (ans == JOptionPane.YES_OPTION) {
+                // Remover selecionado
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
