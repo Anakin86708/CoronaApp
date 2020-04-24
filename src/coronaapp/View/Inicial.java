@@ -32,7 +32,6 @@ public class Inicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cmbIdioma = new javax.swing.JComboBox<>();
@@ -55,6 +54,9 @@ public class Inicial extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jPasswordSenha = new javax.swing.JPasswordField();
+        topPanel3 = new javax.swing.JPanel();
+        titleLabel3 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CoronaApp - Inicial");
@@ -62,11 +64,6 @@ public class Inicial extends javax.swing.JFrame {
         setSize(topPanel.getSize());
 
         jPanel1.setAutoscrolls(true);
-
-        titleLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("CoronaApp");
-        titleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setText("Selecione o idioma:");
 
@@ -136,7 +133,7 @@ public class Inicial extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbIdioma, 0, 350, Short.MAX_VALUE)
+                                    .addComponent(cmbIdioma, 0, 361, Short.MAX_VALUE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
@@ -227,6 +224,44 @@ public class Inicial extends javax.swing.JFrame {
                         .addGap(25, 25, 25))))
         );
 
+        titleLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        titleLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel3.setText("CoronaApp");
+        titleLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        btnVoltar.setLabel("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout topPanel3Layout = new javax.swing.GroupLayout(topPanel3);
+        topPanel3.setLayout(topPanel3Layout);
+        topPanel3Layout.setHorizontalGroup(
+            topPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
+        );
+        topPanel3Layout.setVerticalGroup(
+            topPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanel3Layout.createSequentialGroup()
+                .addGroup(topPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(titleLabel3))
+                    .addGroup(topPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnVoltar.getAccessibleContext().setAccessibleName("Voltar");
+
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
@@ -234,7 +269,7 @@ public class Inicial extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -242,10 +277,10 @@ public class Inicial extends javax.swing.JFrame {
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(topPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -301,6 +336,14 @@ public class Inicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordSenhaActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,6 +385,9 @@ public class Inicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSair1;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JCheckBox checkEquipeMedica;
     private javax.swing.JComboBox<String> cmbIdioma;
     private javax.swing.JLabel jLabel1;
@@ -357,8 +403,15 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordSenha;
+    private javax.swing.JLabel nomeLabel;
+    private javax.swing.JLabel nomeLabel1;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel titleLabel1;
+    private javax.swing.JLabel titleLabel3;
     private javax.swing.JPanel topPanel;
+    private javax.swing.JPanel topPanel1;
+    private javax.swing.JPanel topPanel2;
+    private javax.swing.JPanel topPanel3;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCpf;
