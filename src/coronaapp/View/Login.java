@@ -177,7 +177,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
+        /*
+            Verificação de Login
+        */
         
+        //Se credencias estiverem corretas
+        
+        //Se for equipe médica
+        //Menu menu = new Menu(true);
+        
+        //Se for paciente
+        Menu menu = new Menu(false);
+        
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
