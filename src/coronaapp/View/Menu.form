@@ -159,6 +159,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar sintomas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarSintomasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnVerificarHistoricoPaciente">
               <Properties>
@@ -169,6 +172,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar cadastro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarCadastroPacienteActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -237,6 +243,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar cadastro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarCadastroMedicoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

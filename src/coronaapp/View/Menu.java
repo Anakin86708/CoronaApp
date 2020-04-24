@@ -104,10 +104,20 @@ public class Menu extends javax.swing.JFrame {
         btnMensagensPaciente.setText("Mensagens");
 
         btnAtualizarSintomas.setText("Atualizar sintomas");
+        btnAtualizarSintomas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarSintomasActionPerformed(evt);
+            }
+        });
 
         btnVerificarHistoricoPaciente.setText("Verificar histórico médico");
 
         btnAtualizarCadastroPaciente.setText("Atualizar cadastro");
+        btnAtualizarCadastroPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarCadastroPacienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pacientePanelLayout = new javax.swing.GroupLayout(pacientePanel);
         pacientePanel.setLayout(pacientePanelLayout);
@@ -147,6 +157,11 @@ public class Menu extends javax.swing.JFrame {
         btnGerarRelatorio.setText("Gerar relatório");
 
         btnAtualizarCadastroMedico.setText("Atualizar cadastro");
+        btnAtualizarCadastroMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarCadastroMedicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout medicoPanelLayout = new javax.swing.GroupLayout(medicoPanel);
         medicoPanel.setLayout(medicoPanelLayout);
@@ -203,9 +218,35 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-        new Inicial().setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAtualizarCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroMedicoActionPerformed
+        // TODO add your handling code here:
+        Inicial inicial = new Inicial();
+        inicial.setVisible(true);
+        inicial.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAtualizarCadastroMedicoActionPerformed
+
+    private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
+        // TODO add your handling code here:
+        Inicial inicial = new Inicial();
+        inicial.setVisible(true);
+        inicial.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAtualizarCadastroPacienteActionPerformed
+
+    private void btnAtualizarSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarSintomasActionPerformed
+        // TODO add your handling code here:
+        AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
+        atualizarSintomas.setVisible(true);
+        atualizarSintomas.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAtualizarSintomasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,19 +296,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVerificarHistoricoPaciente;
     private javax.swing.JPanel conteudoPanel;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JPanel medicoPanel;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel pacientePanel;
-    private javax.swing.JPanel pacientePanel1;
-    private javax.swing.JPanel pacientePanel2;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
