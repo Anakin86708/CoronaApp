@@ -42,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         nomeLabel = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         conteudoPanel = new javax.swing.JPanel();
         pacientePanel = new javax.swing.JPanel();
         btnMensagensPaciente = new javax.swing.JButton();
@@ -73,14 +74,18 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/coronaapp/icons/logo.png"))); // NOI18N
+
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nomeLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -91,17 +96,24 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(topPanelLayout.createSequentialGroup()
                         .addComponent(nomeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         conteudoPanel.setLayout(new java.awt.BorderLayout());
 
         btnMensagensPaciente.setText("Mensagens");
+        btnMensagensPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMensagensActionPerformed(evt);
+            }
+        });
 
         btnAtualizarSintomas.setText("Atualizar sintomas");
         btnAtualizarSintomas.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +161,11 @@ public class Menu extends javax.swing.JFrame {
         conteudoPanel.add(pacientePanel, java.awt.BorderLayout.CENTER);
 
         btnMensagensMedicas.setText("Mensagens");
+        btnMensagensMedicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMensagensActionPerformed(evt);
+            }
+        });
 
         btnMarcarVisita.setText("Marcar visita");
 
@@ -217,36 +234,39 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
         Login login = new Login();
         login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        login.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAtualizarCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroMedicoActionPerformed
-        // TODO add your handling code here:
-        Inicial inicial = new Inicial();
+        Cadastro inicial = new Cadastro();
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarCadastroMedicoActionPerformed
 
     private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
-        // TODO add your handling code here:
-        Inicial inicial = new Inicial();
+        Cadastro inicial = new Cadastro();
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarCadastroPacienteActionPerformed
 
     private void btnAtualizarSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarSintomasActionPerformed
-        // TODO add your handling code here:
         AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
         atualizarSintomas.setVisible(true);
         atualizarSintomas.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarSintomasActionPerformed
+
+    private void btnMensagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensActionPerformed
+        Mensagens mensagens = new Mensagens();
+        mensagens.setVisible(true);
+        mensagens.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMensagensActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,7 +302,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarCadastroMedico;
@@ -296,6 +316,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVerificarHistoricoPaciente;
     private javax.swing.JPanel conteudoPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel medicoPanel;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel pacientePanel;
