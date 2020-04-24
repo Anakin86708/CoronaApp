@@ -11,21 +11,14 @@ import java.awt.Dimension;
  *
  * @author silva
  */
-public class Menu extends javax.swing.JFrame {
+public class AtualizarSintomas extends javax.swing.JFrame {
 
-    private boolean equipeMedica;
-
-    /**
-     * Creates new form Menu
-     *
-     * @param equipeMedica
-     */
-    public Menu(boolean equipeMedica) {
+    public AtualizarSintomas() {
         initComponents();
-        this.equipeMedica = equipeMedica;
-
-        pacientePanel.setVisible(!equipeMedica);
-        medicoPanel.setVisible(equipeMedica);
+        
+        //Mantém btns desabilitados enquanto não seleciona um sintoma
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
 
     }
 
@@ -40,20 +33,13 @@ public class Menu extends javax.swing.JFrame {
 
         topPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
-        nomeLabel = new javax.swing.JLabel();
-        btnSair = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         conteudoPanel = new javax.swing.JPanel();
-        pacientePanel = new javax.swing.JPanel();
-        btnMensagensPaciente = new javax.swing.JButton();
-        btnAtualizarSintomas = new javax.swing.JButton();
-        btnVerificarHistoricoPaciente = new javax.swing.JButton();
-        btnAtualizarCadastroPaciente = new javax.swing.JButton();
-        medicoPanel = new javax.swing.JPanel();
-        btnMensagensMedicas = new javax.swing.JButton();
-        btnMarcarVisita = new javax.swing.JButton();
-        btnHistoricoMedico = new javax.swing.JButton();
-        btnGerarRelatorio = new javax.swing.JButton();
-        btnAtualizarCadastroMedico = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listSintomas = new javax.swing.JList<>();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -64,12 +50,10 @@ public class Menu extends javax.swing.JFrame {
         titleLabel.setText("CoronaApp");
         titleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        nomeLabel.setText("Olá, [nome]");
-
-        btnSair.setText("Sair");
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -80,120 +64,82 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nomeLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel)
                     .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(nomeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(titleLabel))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        conteudoPanel.setLayout(new java.awt.BorderLayout());
+        listSintomas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Sintoma: Sintoma1 - Gravidade: Gravidade1", "Sintoma: Sintoma2 - Gravidade: Gravidade2", "Sintoma: Sintoma3 - Gravidade: Gravidade3", "Sintoma: Sintoma4 - Gravidade: Gravidade4", "Sintoma: Sintoma5 - Gravidade: Gravidade5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listSintomas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listSintomas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listSintomas.setMinimumSize(new java.awt.Dimension(33, 158));
+        listSintomas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSintomasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listSintomas);
 
-        btnMensagensPaciente.setText("Mensagens");
+        btnEditar.setText("Editar");
 
-        btnAtualizarSintomas.setText("Atualizar sintomas");
+        btnExcluir.setText("Excluir");
 
-        btnVerificarHistoricoPaciente.setText("Verificar histórico médico");
+        btnAdicionar.setText("Adicionar");
 
-        btnAtualizarCadastroPaciente.setText("Atualizar cadastro");
-
-        javax.swing.GroupLayout pacientePanelLayout = new javax.swing.GroupLayout(pacientePanel);
-        pacientePanel.setLayout(pacientePanelLayout);
-        pacientePanelLayout.setHorizontalGroup(
-            pacientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pacientePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pacientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMensagensPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtualizarSintomas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerificarHistoricoPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtualizarCadastroPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout conteudoPanelLayout = new javax.swing.GroupLayout(conteudoPanel);
+        conteudoPanel.setLayout(conteudoPanelLayout);
+        conteudoPanelLayout.setHorizontalGroup(
+            conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(conteudoPanelLayout.createSequentialGroup()
+                .addComponent(btnEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdicionar))
         );
-        pacientePanelLayout.setVerticalGroup(
-            pacientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pacientePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMensagensPaciente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtualizarSintomas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVerificarHistoricoPaciente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtualizarCadastroPaciente)
-                .addContainerGap())
+        conteudoPanelLayout.setVerticalGroup(
+            conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conteudoPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnAdicionar)))
         );
-
-        conteudoPanel.add(pacientePanel, java.awt.BorderLayout.CENTER);
-
-        btnMensagensMedicas.setText("Mensagens");
-
-        btnMarcarVisita.setText("Marcar visita");
-
-        btnHistoricoMedico.setText("Verificar histórico médico");
-
-        btnGerarRelatorio.setText("Gerar relatório");
-
-        btnAtualizarCadastroMedico.setText("Atualizar cadastro");
-
-        javax.swing.GroupLayout medicoPanelLayout = new javax.swing.GroupLayout(medicoPanel);
-        medicoPanel.setLayout(medicoPanelLayout);
-        medicoPanelLayout.setHorizontalGroup(
-            medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(medicoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnAtualizarCadastroMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMensagensMedicas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMarcarVisita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistoricoMedico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        medicoPanelLayout.setVerticalGroup(
-            medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(medicoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMensagensMedicas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMarcarVisita)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHistoricoMedico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGerarRelatorio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtualizarCadastroMedico))
-        );
-
-        conteudoPanel.add(medicoPanel, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(conteudoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(conteudoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -201,11 +147,19 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        new Inicial().setVisible(true);
+        Menu menu = new Menu(false);
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
         this.setVisible(false);
-    }//GEN-LAST:event_btnSairActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void listSintomasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSintomasMouseClicked
+        // TODO add your handling code here:
+        btnEditar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+    }//GEN-LAST:event_listSintomasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -244,30 +198,13 @@ public class Menu extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizarCadastroMedico;
-    private javax.swing.JButton btnAtualizarCadastroPaciente;
-    private javax.swing.JButton btnAtualizarSintomas;
-    private javax.swing.JButton btnGerarRelatorio;
-    private javax.swing.JButton btnHistoricoMedico;
-    private javax.swing.JButton btnMarcarVisita;
-    private javax.swing.JButton btnMensagensMedicas;
-    private javax.swing.JButton btnMensagensPaciente;
-    private javax.swing.JButton btnSair;
-    private javax.swing.JButton btnVerificarHistoricoPaciente;
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel conteudoPanel;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JPanel medicoPanel;
-    private javax.swing.JLabel nomeLabel;
-    private javax.swing.JPanel pacientePanel;
-    private javax.swing.JPanel pacientePanel1;
-    private javax.swing.JPanel pacientePanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listSintomas;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
