@@ -1,7 +1,5 @@
 package coronaapp.View;
 
-import coronaapp.*;
-import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     public Login() {
@@ -179,25 +177,23 @@ public class Login extends javax.swing.JFrame {
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         /*
             Verificação de Login
-        */
-        
+         */
+
         //Se credencias estiverem corretas
-        
         //Se for equipe médica
         //Menu menu = new Menu(true);
-        
         //Se for paciente
         Menu menu = new Menu(false);
-        
+
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Inicial inicial = new Inicial();
-        inicial.setVisible(true);
-        inicial.setLocationRelativeTo(null);
+        Cadastro cadastro = new Cadastro();
+        cadastro.setVisible(true);
+        cadastro.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
