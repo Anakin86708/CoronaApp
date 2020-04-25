@@ -1,6 +1,7 @@
 package coronaapp.View;
 
 import java.util.Locale;
+import javax.swing.JOptionPane;
 
 public class ConsultarHistorico extends javax.swing.JFrame {
 
@@ -40,6 +41,7 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.setToolTipText("");
         txtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCPFActionPerformed(evt);
@@ -75,7 +77,7 @@ public class ConsultarHistorico extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(50, 50, 50)
                 .addComponent(btnConsultar)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         btnVoltar.setText("Voltar");
@@ -95,15 +97,15 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addGap(30, 30, 30))
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +116,7 @@ public class ConsultarHistorico extends javax.swing.JFrame {
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -152,11 +154,22 @@ public class ConsultarHistorico extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        
+        Menu menu = new Menu(true);
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.setVisible((false));
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
+        if("   .   .   -  ".equals(txtCPF.getText())){
+            JOptionPane.showMessageDialog(topPanel, "Digite o CPF do paciente!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
+        }else{
+            Historico historico = new Historico(true);
+            historico.setVisible(true);
+            historico.setLocationRelativeTo(this);
+            this.setVisible(false);    
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
