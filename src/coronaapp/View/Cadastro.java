@@ -6,6 +6,7 @@
 package coronaapp.View;
 
 import coronaapp.EquipeMedica;
+import coronaapp.Paciente;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,8 +15,9 @@ import javax.swing.JOptionPane;
  */
 public class Cadastro extends javax.swing.JFrame {
 
-    private String nome, email, cpf, telefone, bairro, cidade, pais;
-    private char [] senha;
+    private String nome, email, cpf, telefone, bairro, cidade, estado, pais, senha;
+    private Paciente paciente = null;
+    private EquipeMedica equipeMedica = null;
 
     public boolean setEmail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -26,12 +28,49 @@ public class Cadastro extends javax.swing.JFrame {
         return false;
     }
 
-
     /**
      * Creates new form Login
      */
     public Cadastro() {
         initComponents();
+    }
+
+    public Cadastro(Paciente paciente) {
+        initComponents();
+        this.paciente = paciente;
+        //checkEquipeMedica.setEnabled(false);
+        updateText();
+    }
+
+    public Cadastro(EquipeMedica equipeMedica) {
+        initComponents();
+        this.equipeMedica = equipeMedica;
+        //checkEquipeMedica.setEnabled(false);
+        updateText();
+    }
+
+    private void updateText() {
+        if (paciente != null) {
+            txtNome.setText(paciente.getNome());
+            txtEmail.setText(paciente.getEmail());
+            formatedCPF.setText(paciente.getCpf());
+            formatedTelefone.setText(paciente.getTelefone());
+            txtBairro.setText(paciente.getBairro());
+            txtCidade.setText(paciente.getCidade());
+            txtEstado.setText(paciente.getEstado());
+            txtPais.setText(paciente.getPais());
+            checkEquipeMedica.setSelected(false);
+        } else {
+            txtNome.setText(equipeMedica.getNome());
+            txtEmail.setText(equipeMedica.getEmail());
+            formatedCPF.setText(equipeMedica.getCpf());
+            formatedTelefone.setText(equipeMedica.getTelefone());
+            txtBairro.setText(equipeMedica.getBairro());
+            txtCidade.setText(equipeMedica.getCidade());
+            txtEstado.setText(equipeMedica.getEstado());
+            txtPais.setText(equipeMedica.getPais());
+            checkEquipeMedica.setSelected(true);
+        }
     }
 
     /**
@@ -54,7 +93,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtPais = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         checkEquipeMedica = new javax.swing.JCheckBox();
         btnEnviar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -67,6 +106,8 @@ public class Cadastro extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         formatedCPF = new javax.swing.JFormattedTextField();
         formatedTelefone = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtPais = new javax.swing.JTextField();
         topPanel3 = new javax.swing.JPanel();
         titleLabel3 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
@@ -84,7 +125,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel2.setText("Digite seu endereço:");
 
-        txtBairro.setToolTipText("Bairro");
+        txtBairro.setToolTipText("");
         txtBairro.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtBairroFocusLost(evt);
@@ -95,19 +136,19 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel4.setText("Cidade:");
 
-        txtCidade.setToolTipText("Bairro");
+        txtCidade.setToolTipText("");
         txtCidade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCidadeFocusLost(evt);
             }
         });
 
-        jLabel5.setText("País:");
+        jLabel5.setText("Estado:");
 
-        txtPais.setToolTipText("Bairro");
-        txtPais.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtEstado.setToolTipText("");
+        txtEstado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPaisFocusLost(evt);
+                txtEstadoFocusLost(evt);
             }
         });
 
@@ -126,7 +167,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel9.setText("E-mail");
 
-        txtEmail.setToolTipText("Bairro");
+        txtEmail.setToolTipText("");
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
@@ -135,7 +176,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel10.setText("Nome:");
 
-        txtNome.setToolTipText("Bairro");
+        txtNome.setToolTipText("");
         txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNomeFocusLost(evt);
@@ -182,6 +223,15 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("País:");
+
+        txtPais.setToolTipText("");
+        txtPais.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPaisFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -204,12 +254,15 @@ public class Cadastro extends javax.swing.JFrame {
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
                                             .addComponent(jLabel11))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(formatedCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(formatedCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
+                                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -227,10 +280,12 @@ public class Cadastro extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtBairro)
-                                    .addComponent(txtPais, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtCidade, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                                    .addComponent(formatedTelefone))))))
+                                    .addComponent(formatedTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,24 +322,29 @@ public class Cadastro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(btnEnviar)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkEquipeMedica)
-                                .addGap(25, 25, 25))))
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(formatedCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formatedTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(formatedTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnEnviar)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkEquipeMedica)
+                        .addGap(25, 25, 25))))
         );
 
         titleLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -372,21 +432,23 @@ public class Cadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtPais.getText()) || "".equals(txtNome.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(txtSenha.getPassword())) {
+        if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtEstado.getText()) || "".equals(txtNome.getText()) || "".equals(txtPais.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(txtSenha.getPassword())) {
             JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         } else {
             // Com base na checkBox cria um novo paciente ou equipe médica
             if (checkEquipeMedica.isSelected()) {
                 // Enviar dados para equipe médica
                 String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
-                EquipeMedica equipeMedica = new EquipeMedica(localTrabalho,0,nome,email,cpf,telefone,cidade,"","");
-                Menu menu = new Menu(true);
+                EquipeMedica em = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
+                Menu menu = new Menu(em);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(this);
             } else {
                 // Enviar dados para paciente
-                JOptionPane.showMessageDialog(rootPane, "Paciente");
-                new Menu(false).setVisible(true);
+                //JOptionPane.showMessageDialog(rootPane, "Paciente");
+                Paciente p = new Paciente("", "", 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
+                Menu menu = new Menu(p);
+                menu.setVisible(true);
             }
             this.setVisible(false);
         }
@@ -413,7 +475,10 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeFocusLost
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        setEmail(txtEmail.getText());
+        if (!setEmail(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Favor inserir um email válido!", "Email inválido",JOptionPane.WARNING_MESSAGE);
+            txtEmail.setText("");
+        }
     }//GEN-LAST:event_txtEmailFocusLost
 
     private void formatedCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formatedCPFFocusLost
@@ -432,13 +497,17 @@ public class Cadastro extends javax.swing.JFrame {
         cidade = txtCidade.getText();
     }//GEN-LAST:event_txtCidadeFocusLost
 
+    private void txtEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEstadoFocusLost
+        estado = txtEstado.getText();
+    }//GEN-LAST:event_txtEstadoFocusLost
+
+    private void txtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusLost
+        senha = new String(txtSenha.getPassword());
+    }//GEN-LAST:event_txtSenhaFocusLost
+
     private void txtPaisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPaisFocusLost
         pais = txtPais.getText();
     }//GEN-LAST:event_txtPaisFocusLost
-
-    private void txtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusLost
-        senha = txtSenha.getPassword();
-    }//GEN-LAST:event_txtSenhaFocusLost
 
     /**
      * @param args the command line arguments
@@ -483,6 +552,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -494,6 +564,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPais;
     private javax.swing.JPasswordField txtSenha;
