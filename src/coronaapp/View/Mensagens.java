@@ -12,12 +12,15 @@ import javax.swing.JOptionPane;
  * @author silva
  */
 public class Mensagens extends javax.swing.JFrame {
+    
+    private boolean equipeMedica;
 
     /**
      * Creates new form Mensagens
      */
-    public Mensagens() {
+    public Mensagens(boolean equipeMedica) {
         initComponents();
+        this.equipeMedica = equipeMedica;
     }
 
     /**
@@ -139,7 +142,7 @@ public class Mensagens extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // É preciso alterar o bool para o valor correto posteriormente
-        Menu menu = new Menu(false);
+        Menu menu = new Menu(this.equipeMedica);
         menu.setVisible(true);
         menu.setLocationRelativeTo(this);
         this.setVisible(false);
@@ -148,7 +151,7 @@ public class Mensagens extends javax.swing.JFrame {
     private void btnExcluirMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMensagemActionPerformed
         int selecionado = listMensagens.getSelectedIndex();
         if (selecionado != -1) {
-            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagens selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagem selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ans == JOptionPane.YES_OPTION) {
                 //listMensagens.remove(selecionado);
             }
@@ -185,11 +188,11 @@ public class Mensagens extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {;
             public void run() {
-                new Mensagens().setVisible(true);
+                new Mensagens(this.equipeMedica).setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
