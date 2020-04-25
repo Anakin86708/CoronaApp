@@ -111,7 +111,7 @@ public class Menu extends javax.swing.JFrame {
         btnMensagensPaciente.setText("Mensagens");
         btnMensagensPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMensagensActionPerformed(evt);
+                btnMensagensPacienteActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class Menu extends javax.swing.JFrame {
         btnMensagensMedicas.setText("Mensagens");
         btnMensagensMedicas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMensagensActionPerformed(evt);
+                btnMensagensMedicasActionPerformed(evt);
             }
         });
 
@@ -182,6 +182,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnGerarRelatorio.setText("Gerar relatório");
+        btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioActionPerformed(evt);
+            }
+        });
 
         btnAtualizarCadastroMedico.setText("Atualizar cadastro");
         btnAtualizarCadastroMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -271,26 +276,40 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarSintomasActionPerformed
 
-    private void btnMensagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensActionPerformed
-        Mensagens mensagens = new Mensagens();
+    private void btnMensagensMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensMedicasActionPerformed
+        Mensagens mensagens = new Mensagens(true);
         mensagens.setVisible(true);
         mensagens.setLocationRelativeTo(this);
         this.setVisible(false);
-    }//GEN-LAST:event_btnMensagensActionPerformed
+    }//GEN-LAST:event_btnMensagensMedicasActionPerformed
 
     private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
-        Historico historico = new Historico();
+        Historico historico = new Historico(this.equipeMedica);
         historico.setVisible(true);
         historico.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnHistoricoMedicoActionPerformed
 
     private void btnVerificarHistoricoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarHistoricoPacienteActionPerformed
-        Historico historico = new Historico();
+        Historico historico = new Historico(this.equipeMedica);
         historico.setVisible(true);
         historico.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnVerificarHistoricoPacienteActionPerformed
+
+    private void btnMensagensPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensPacienteActionPerformed
+        Mensagens mensagens = new Mensagens(false);
+        mensagens.setVisible(true);
+        mensagens.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMensagensPacienteActionPerformed
+
+    private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
+        GerarRelatorio gerarRelatorio = new GerarRelatorio();
+        gerarRelatorio.setVisible(true);
+        gerarRelatorio.setLocationRelativeTo(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     /**
      * @param args the command line arguments
