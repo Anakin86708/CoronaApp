@@ -183,7 +183,7 @@ public class Login extends javax.swing.JFrame {
         //Se for equipe médica
         //Menu menu = new Menu(true);
         //Se for paciente
-        Menu menu = new Menu(false);
+        Menu menu = new Menu(true);
 
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
