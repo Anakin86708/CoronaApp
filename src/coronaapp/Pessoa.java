@@ -38,6 +38,10 @@ public class Pessoa {
         this.pais = pais;
         this.senha = senha;
     }
+    
+     public void cadastrar (){
+        
+    }
 
     public int getIdPessoa() {
         return idPessoa;
