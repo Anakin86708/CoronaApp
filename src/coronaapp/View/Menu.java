@@ -5,6 +5,8 @@
  */
 package coronaapp.View;
 
+import coronaapp.EquipeMedica;
+import coronaapp.Paciente;
 import java.awt.Dimension;
 
 /**
@@ -13,20 +15,40 @@ import java.awt.Dimension;
  */
 public class Menu extends javax.swing.JFrame {
 
-    private boolean equipeMedica;
+    private boolean isEquipeMedica;
+    private Paciente paciente;
+    private EquipeMedica equipeMedica;
 
     /**
      * Creates new form Menu
      *
-     * @param equipeMedica
+     * @param isEquipeMedica
      */
-    public Menu(boolean equipeMedica) {
+    public Menu(boolean isEquipeMedica) {
         initComponents();
-        this.equipeMedica = equipeMedica;
+        configureView(isEquipeMedica);
+    }
 
-        pacientePanel.setVisible(!equipeMedica);
-        medicoPanel.setVisible(equipeMedica);
+    public Menu(Paciente p) {
+        initComponents();
+        this.paciente = p;
+        
+        configureView(false);
+        nomeLabel.setText("Olá, "+paciente.getNome());
+    }
 
+    public Menu(EquipeMedica em) {
+        initComponents();
+        this.equipeMedica = em;
+        
+        configureView(true);
+        nomeLabel.setText("Olá, "+em.getNome());
+    }
+
+    private void configureView(boolean isEquipeMedica) {
+        this.isEquipeMedica = isEquipeMedica;
+        pacientePanel.setVisible(!isEquipeMedica);
+        medicoPanel.setVisible(isEquipeMedica);
     }
 
     /**
@@ -256,14 +278,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAtualizarCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroMedicoActionPerformed
-        Cadastro inicial = new Cadastro();
+        Cadastro inicial = new Cadastro(this.equipeMedica);
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarCadastroMedicoActionPerformed
 
     private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
-        Cadastro inicial = new Cadastro();
+        Cadastro inicial = new Cadastro(this.paciente);
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -284,14 +306,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMensagensMedicasActionPerformed
 
     private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
-        Historico historico = new Historico(this.equipeMedica);
+        Historico historico = new Historico(this.isEquipeMedica);
         historico.setVisible(true);
         historico.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnHistoricoMedicoActionPerformed
 
     private void btnVerificarHistoricoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarHistoricoPacienteActionPerformed
-        Historico historico = new Historico(this.equipeMedica);
+        Historico historico = new Historico(this.isEquipeMedica);
         historico.setVisible(true);
         historico.setLocationRelativeTo(this);
         this.setVisible(false);
