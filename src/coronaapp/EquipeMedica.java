@@ -22,6 +22,22 @@ public class EquipeMedica extends Pessoa {
         super(idPessoa, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
         this.codigoLocalTrabalho = codigoLocalTrabalho;
     }
+    
+    public void cadastrarMembro(int idPessoa){
+        
+    }
+    public Relatorio gerarRelatorio (char tipo){
+         return null; // ALTERAR
+    }
+    public Paciente filtrarSintoma(){
+        return null; // ALTERAR
+    }
+    public void agendarVisita (char data, int horario){
+        
+    }
+    public Paciente filtrarPrioridade (){
+        return null; // ALTERAR
+    }
 
     public String getCodigoLocalTrabalho() {
         return codigoLocalTrabalho;
