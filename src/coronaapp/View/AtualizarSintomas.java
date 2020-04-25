@@ -169,12 +169,12 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int selecionado = listSintomas.getSelectedIndex();
         if (selecionado != -1) {
-            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagens selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir o sintoma selecionado?", "Remover sintoma", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ans == JOptionPane.YES_OPTION) {
                 // Remover selecionado
             }
         } else {
-            JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Selecione um sintoma primeiro", "Remover sintoma", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
