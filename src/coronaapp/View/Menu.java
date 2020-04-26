@@ -7,7 +7,6 @@ package coronaapp.View;
 
 import coronaapp.EquipeMedica;
 import coronaapp.Paciente;
-import java.awt.Dimension;
 
 /**
  *
@@ -50,6 +49,16 @@ public class Menu extends javax.swing.JFrame {
         pacientePanel.setVisible(!isEquipeMedica);
         medicoPanel.setVisible(isEquipeMedica);
     }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public void setEquipeMedica(EquipeMedica equipeMedica) {
+        this.equipeMedica = equipeMedica;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -278,14 +287,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAtualizarCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroMedicoActionPerformed
-        Cadastro inicial = new Cadastro(this.equipeMedica);
+        Cadastro inicial = new Cadastro(this,this.equipeMedica);
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualizarCadastroMedicoActionPerformed
 
     private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
-        Cadastro inicial = new Cadastro(this.paciente);
+        Cadastro inicial = new Cadastro(this,this.paciente);
         inicial.setVisible(true);
         inicial.setLocationRelativeTo(null);
         this.setVisible(false);
