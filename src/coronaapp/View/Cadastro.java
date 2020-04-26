@@ -7,6 +7,7 @@ package coronaapp.View;
 
 import coronaapp.EquipeMedica;
 import coronaapp.Paciente;
+import coronaapp.Sintomas;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,7 @@ public class Cadastro extends javax.swing.JFrame {
     private String nome, email, cpf, telefone, bairro, cidade, estado, pais, senha;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
+    private Sintomas sintoma = null;
     private Menu menu = null;
 
     public boolean setEmail(String email) {
@@ -31,14 +33,17 @@ public class Cadastro extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
+     * @param sintomas
      */
-    public Cadastro() {
+    public Cadastro(Sintomas sintomas) {
+        this.sintoma = sintomas;
         initComponents();
     }
 
-    public Cadastro(Menu menu, Paciente paciente) {
+    public Cadastro(Menu menu, Paciente paciente, Sintomas sintomas) {
         initComponents();
         this.paciente = paciente;
+        this.sintoma = sintomas;
         this.menu = menu;
         //checkEquipeMedica.setEnabled(false);
         btnEnviar.setText("Atualizar");
@@ -60,6 +65,7 @@ public class Cadastro extends javax.swing.JFrame {
             txtEmail.setText(paciente.getEmail());
             formatedCPF.setText(paciente.getCpf());
             formatedTelefone.setText(paciente.getTelefone());
+            cmbIdioma.setSelectedIndex(paciente.getIdioma());
             txtBairro.setText(paciente.getBairro());
             txtCidade.setText(paciente.getCidade());
             txtEstado.setText(paciente.getEstado());
@@ -70,6 +76,7 @@ public class Cadastro extends javax.swing.JFrame {
             txtEmail.setText(equipeMedica.getEmail());
             formatedCPF.setText(equipeMedica.getCpf());
             formatedTelefone.setText(equipeMedica.getTelefone());
+            cmbIdioma.setSelectedIndex(equipeMedica.getIdioma());
             txtBairro.setText(equipeMedica.getBairro());
             txtCidade.setText(equipeMedica.getCidade());
             txtEstado.setText(equipeMedica.getEstado());
@@ -77,8 +84,8 @@ public class Cadastro extends javax.swing.JFrame {
             checkEquipeMedica.setSelected(true);
         }
     }
-    
-    private void updateVariables(){
+
+    private void updateVariables() {
         nome = txtNome.getText();
         if (!setEmail(txtEmail.getText())) {
             JOptionPane.showMessageDialog(this, "Favor inserir um email válido!", "Email inválido", JOptionPane.WARNING_MESSAGE);
@@ -446,20 +453,22 @@ public class Cadastro extends javax.swing.JFrame {
         } else {
             // Com base na checkBox cria um novo paciente ou equipe m�dica
             updateVariables();
-            if (checkEquipeMedica.isSelected()) {
-                String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
-                equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
-                menu = new Menu(equipeMedica);
-                menu.setVisible(true);
-                menu.setLocationRelativeTo(this);
-            } else {
-                // Enviar dados para paciente
-                //JOptionPane.showMessageDialog(rootPane, "Paciente");
-                paciente = new Paciente("", "", 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
-                menu = new Menu(paciente);
-                menu.setVisible(true);
+            try {
+                if (checkEquipeMedica.isSelected()) {
+                    String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                    equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    menu = new Menu(equipeMedica);
+                } else {
+                    paciente = new Paciente("", "", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    menu = new Menu(paciente);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Não foi possível reazizar esta ação!\nErro:" + e.getMessage(), "Erro do executar ação", JOptionPane.ERROR_MESSAGE);
             }
-            this.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(this);
+            this.dispose();
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -542,7 +551,7 @@ public class Cadastro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Cadastro().setVisible(true);
+                new Cadastro(null).setVisible(true);
             }
         });
     }
