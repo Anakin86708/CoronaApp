@@ -12,19 +12,19 @@ public class EquipeMedica extends Pessoa {
      * @param email
      * @param cpf
      * @param telefone
+     * @param idioma
      * @param bairro
      * @param cidade
      * @param estado
      * @param pais
      * @param senha
-     */
-    public EquipeMedica(String codigoLocalTrabalho, int idPessoa, String nome, String email, String cpf, String telefone, String bairro, String cidade, String estado, String pais, String senha) {
-        super(idPessoa, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
+     */   
+    public EquipeMedica(String codigoLocalTrabalho, int idPessoa, String nome, String email, String cpf, String telefone, int idioma, String bairro, String cidade, String estado, String pais, String senha){
+        super(idPessoa, nome, email, cpf, telefone, idioma, bairro, cidade, estado, pais, senha);
         this.codigoLocalTrabalho = codigoLocalTrabalho;
     }
-    
-    public void cadastrarMembro(int idPessoa){
-        
+
+    public void cadastrarMembro(int idPessoa) {
     }
     public Relatorio gerarRelatorio (char tipo){
          return null; // ALTERAR
