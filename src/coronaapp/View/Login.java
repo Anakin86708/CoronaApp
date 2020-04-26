@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
         //Se for equipe médica
         //Menu menu = new Menu(true);
         //Se for paciente
-        Menu menu = new Menu(true);
+        Menu menu = new Menu(false);
 
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
@@ -189,9 +189,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Cadastro cadastro = new Cadastro();
-        cadastro.setVisible(true);
-        cadastro.setLocationRelativeTo(this);
+        AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
+        atualizarSintomas.setVisible(true);
+        atualizarSintomas.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
