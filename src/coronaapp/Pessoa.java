@@ -38,9 +38,9 @@ public class Pessoa {
         this.pais = pais;
         this.senha = senha;
     }
-    
-     public void cadastrar (){
-        
+
+    public void cadastrar() {
+
     }
 
     public int getIdPessoa() {
@@ -63,8 +63,13 @@ public class Pessoa {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public boolean setEmail(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        if (email.matches(regex)) {
+            this.email = email;
+            return true;
+        }
+        return false;
     }
 
     public String getCpf() {
