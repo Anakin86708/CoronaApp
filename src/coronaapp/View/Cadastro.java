@@ -41,7 +41,8 @@ public class Cadastro extends javax.swing.JFrame {
         this.paciente = paciente;
         this.menu = menu;
         //checkEquipeMedica.setEnabled(false);
-        updateText();
+        btnEnviar.setText("Atualizar");
+        updateTextbox();
     }
 
     public Cadastro(Menu menu, EquipeMedica equipeMedica) {
@@ -49,10 +50,11 @@ public class Cadastro extends javax.swing.JFrame {
         this.equipeMedica = equipeMedica;
         this.menu = menu;
         //checkEquipeMedica.setEnabled(false);
-        updateText();
+        btnEnviar.setText("Atualizar");
+        updateTextbox();
     }
 
-    private void updateText() {
+    private void updateTextbox() {
         if (paciente != null) {
             txtNome.setText(paciente.getNome());
             txtEmail.setText(paciente.getEmail());
@@ -74,6 +76,21 @@ public class Cadastro extends javax.swing.JFrame {
             txtPais.setText(equipeMedica.getPais());
             checkEquipeMedica.setSelected(true);
         }
+    }
+    
+    private void updateVariables(){
+        nome = txtNome.getText();
+        if (!setEmail(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "Favor inserir um email vÃ¡lido!", "Email invÃ¡lido", JOptionPane.WARNING_MESSAGE);
+            txtEmail.setText("");
+        }
+        cpf = (formatedCPF.getText());
+        telefone = (formatedTelefone.getText());
+        bairro = txtBairro.getText();
+        cidade = txtCidade.getText();
+        estado = txtEstado.getText();
+        pais = txtPais.getText();
+        senha = new String(txtSenha.getPassword());
     }
 
     /**
@@ -185,22 +202,12 @@ public class Cadastro extends javax.swing.JFrame {
                 txtNomeFocusLost(evt);
             }
         });
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
 
         jLabel11.setText("Senha:");
 
         txtSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSenhaFocusLost(evt);
-            }
-        });
-        txtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaActionPerformed(evt);
             }
         });
 
@@ -338,14 +345,13 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(btnEnviar)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkEquipeMedica)
                         .addGap(25, 25, 25))))
         );
@@ -436,11 +442,12 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtEstado.getText()) || "".equals(txtNome.getText()) || "".equals(txtPais.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(txtSenha.getPassword())) {
-            JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(topPanel, "Preencha todas as informaÃ§Ãµes!", "Valores invÃ¡lidos", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Com base na checkBox cria um novo paciente ou equipe médica
+            // Com base na checkBox cria um novo paciente ou equipe mï¿½dica
+            updateVariables();
             if (checkEquipeMedica.isSelected()) {
-                String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                String localTrabalho = JOptionPane.showInputDialog(this, "Digite o cÃ³digo de seu local de trabalho: ");
                 equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
                 menu = new Menu(equipeMedica);
                 menu.setVisible(true);
@@ -455,14 +462,6 @@ public class Cadastro extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
-
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
-
-    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         if (this.paciente == null && this.equipeMedica == null) {
