@@ -18,6 +18,7 @@ public class Cadastro extends javax.swing.JFrame {
     private String nome, email, cpf, telefone, bairro, cidade, estado, pais, senha;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
+    private Menu menu = null;
 
     public boolean setEmail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -35,16 +36,18 @@ public class Cadastro extends javax.swing.JFrame {
         initComponents();
     }
 
-    public Cadastro(Paciente paciente) {
+    public Cadastro(Menu menu, Paciente paciente) {
         initComponents();
         this.paciente = paciente;
+        this.menu = menu;
         //checkEquipeMedica.setEnabled(false);
         updateText();
     }
 
-    public Cadastro(EquipeMedica equipeMedica) {
+    public Cadastro(Menu menu, EquipeMedica equipeMedica) {
         initComponents();
         this.equipeMedica = equipeMedica;
+        this.menu = menu;
         //checkEquipeMedica.setEnabled(false);
         updateText();
     }
@@ -433,21 +436,20 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtEstado.getText()) || "".equals(txtNome.getText()) || "".equals(txtPais.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(txtSenha.getPassword())) {
-            JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(topPanel, "Preencha todas as informa��es!", "Valores inv�lidos", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Com base na checkBox cria um novo paciente ou equipe médica
+            // Com base na checkBox cria um novo paciente ou equipe m�dica
             if (checkEquipeMedica.isSelected()) {
-                // Enviar dados para equipe médica
-                String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
-                EquipeMedica em = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
-                Menu menu = new Menu(em);
+                String localTrabalho = JOptionPane.showInputDialog(this, "Digite o c�digo de seu local de trabalho: ");
+                equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
+                menu = new Menu(equipeMedica);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(this);
             } else {
                 // Enviar dados para paciente
                 //JOptionPane.showMessageDialog(rootPane, "Paciente");
-                Paciente p = new Paciente("", "", 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
-                Menu menu = new Menu(p);
+                paciente = new Paciente("", "", 0, nome, email, cpf, telefone, bairro, cidade, estado, pais, senha);
+                menu = new Menu(paciente);
                 menu.setVisible(true);
             }
             this.setVisible(false);
@@ -463,11 +465,19 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        Login login = new Login();
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        if (this.paciente == null && this.equipeMedica == null) {
+            Login login = new Login();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+        } else if (paciente != null) {
+            menu.setPaciente(paciente);
+            menu.setVisible(true);
+        } else if (equipeMedica != null) {
+            menu.setEquipeMedica(equipeMedica);
+            menu.setVisible(true);
+        }
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
@@ -476,7 +486,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
         if (!setEmail(txtEmail.getText())) {
-            JOptionPane.showMessageDialog(this, "Favor inserir um email válido!", "Email inválido",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Favor inserir um email válido!", "Email inválido", JOptionPane.WARNING_MESSAGE);
             txtEmail.setText("");
         }
     }//GEN-LAST:event_txtEmailFocusLost
