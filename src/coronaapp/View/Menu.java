@@ -7,6 +7,8 @@ package coronaapp.View;
 
 import coronaapp.EquipeMedica;
 import coronaapp.Paciente;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,17 +33,17 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Paciente p) {
         initComponents();
         this.paciente = p;
-        
+
         configureView(false);
-        nomeLabel.setText("Olá, "+paciente.getNome());
+        nomeLabel.setText("Olá, " + paciente.getNome());
     }
 
     public Menu(EquipeMedica em) {
         initComponents();
         this.equipeMedica = em;
-        
+
         configureView(true);
-        nomeLabel.setText("Olá, "+em.getNome());
+        nomeLabel.setText("Olá, " + em.getNome());
     }
 
     private void configureView(boolean isEquipeMedica) {
@@ -57,8 +59,6 @@ public class Menu extends javax.swing.JFrame {
     public void setEquipeMedica(EquipeMedica equipeMedica) {
         this.equipeMedica = equipeMedica;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -280,38 +280,58 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        Login login = new Login();
-        login.setVisible(true);
-        login.setLocationRelativeTo(this);
-        this.setVisible(false);
+        try {
+            Login login = new Login();
+            login.setVisible(true);
+            login.setLocationRelativeTo(this);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAtualizarCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroMedicoActionPerformed
-        Cadastro inicial = new Cadastro(this,this.equipeMedica);
-        inicial.setVisible(true);
-        inicial.setLocationRelativeTo(null);
-        this.setVisible(false);
+        try {
+            Cadastro inicial = new Cadastro(this, this.equipeMedica);
+            inicial.setVisible(true);
+            inicial.setLocationRelativeTo(null);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnAtualizarCadastroMedicoActionPerformed
 
     private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
-        Cadastro inicial = new Cadastro(this,this.paciente);
-        inicial.setVisible(true);
-        inicial.setLocationRelativeTo(null);
-        this.setVisible(false);
+        try {
+            Cadastro inicial = new Cadastro(this, this.paciente);
+            inicial.setVisible(true);
+            inicial.setLocationRelativeTo(null);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnAtualizarCadastroPacienteActionPerformed
 
     private void btnAtualizarSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarSintomasActionPerformed
-        AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
-        atualizarSintomas.setVisible(true);
-        atualizarSintomas.setLocationRelativeTo(null);
-        this.setVisible(false);
+        try {
+            AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
+            atualizarSintomas.setVisible(true);
+            atualizarSintomas.setLocationRelativeTo(null);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnAtualizarSintomasActionPerformed
 
     private void btnMensagensMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensMedicasActionPerformed
-        Mensagens mensagens = new Mensagens(true);
-        mensagens.setVisible(true);
-        mensagens.setLocationRelativeTo(this);
-        this.setVisible(false);
+        try {
+            Mensagens mensagens = new Mensagens(true);
+            mensagens.setVisible(true);
+            mensagens.setLocationRelativeTo(this);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnMensagensMedicasActionPerformed
 
     private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
@@ -320,7 +340,7 @@ public class Menu extends javax.swing.JFrame {
         historico.setVisible(true);
         historico.setLocationRelativeTo(this);
         this.setVisible(false);
-        */
+         */
         ConsultarHistorico consultarHistorico = new ConsultarHistorico();
         consultarHistorico.setVisible(true);
         consultarHistorico.setLocationRelativeTo(this);
@@ -328,25 +348,45 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistoricoMedicoActionPerformed
 
     private void btnVerificarHistoricoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarHistoricoPacienteActionPerformed
-        Historico historico = new Historico(this.isEquipeMedica);
-        historico.setVisible(true);
-        historico.setLocationRelativeTo(this);
-        this.setVisible(false);
+        try {
+            Historico historico = new Historico(this.isEquipeMedica);
+            historico.setVisible(true);
+            historico.setLocationRelativeTo(this);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnVerificarHistoricoPacienteActionPerformed
 
     private void btnMensagensPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensPacienteActionPerformed
-        Mensagens mensagens = new Mensagens(false);
-        mensagens.setVisible(true);
-        mensagens.setLocationRelativeTo(this);
-        this.setVisible(false);
+        try {
+            Mensagens mensagens = new Mensagens(false);
+            mensagens.setVisible(true);
+            mensagens.setLocationRelativeTo(this);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnMensagensPacienteActionPerformed
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
-        GerarRelatorio gerarRelatorio = new GerarRelatorio();
-        gerarRelatorio.setVisible(true);
-        gerarRelatorio.setLocationRelativeTo(this);
-        this.setVisible(false);
+        try {
+            GerarRelatorio gerarRelatorio = new GerarRelatorio();
+            gerarRelatorio.setVisible(true);
+            gerarRelatorio.setLocationRelativeTo(this);
+            this.setVisible(false);
+        } catch (Exception e) {
+            messageError(e);
+        }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+
+    private void messageError(Exception e) throws HeadlessException {
+        JOptionPane.showMessageDialog(this, "Não foi possível reazizar esta ação. Faça login novamente!\nErro:" + e.getMessage(), "Erro do executar ação", JOptionPane.ERROR_MESSAGE);
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(this);
+        this.dispose();
+    }
 
     /**
      * @param args the command line arguments
