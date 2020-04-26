@@ -7,6 +7,7 @@ package coronaapp.View;
 
 import coronaapp.EquipeMedica;
 import coronaapp.Paciente;
+import coronaapp.Sintomas;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
@@ -52,6 +53,10 @@ public class Menu extends javax.swing.JFrame {
         medicoPanel.setVisible(isEquipeMedica);
     }
 
+    public void updateSintomasPaciente(Sintomas sintomas) {
+        paciente.setSintomas(sintomas);
+    }
+
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
@@ -74,6 +79,7 @@ public class Menu extends javax.swing.JFrame {
         nomeLabel = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         conteudoPanel = new javax.swing.JPanel();
         pacientePanel = new javax.swing.JPanel();
         btnMensagensPaciente = new javax.swing.JButton();
@@ -113,13 +119,16 @@ public class Menu extends javax.swing.JFrame {
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nomeLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
+                        .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nomeLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
@@ -134,7 +143,9 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
 
         conteudoPanel.setLayout(new java.awt.BorderLayout());
@@ -271,7 +282,7 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(conteudoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -303,7 +314,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnAtualizarCadastroPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarCadastroPacienteActionPerformed
         try {
-            Cadastro inicial = new Cadastro(this, this.paciente);
+            //Enviar para sintomas
+            Cadastro inicial = new Cadastro(this, paciente, paciente.getSintomas());
             inicial.setVisible(true);
             inicial.setLocationRelativeTo(null);
             this.setVisible(false);
@@ -314,7 +326,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnAtualizarSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarSintomasActionPerformed
         try {
-            AtualizarSintomas atualizarSintomas = new AtualizarSintomas();
+            AtualizarSintomas atualizarSintomas = new AtualizarSintomas(this,paciente.getSintomas());
             atualizarSintomas.setVisible(true);
             atualizarSintomas.setLocationRelativeTo(null);
             this.setVisible(false);
@@ -437,6 +449,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnVerificarHistoricoPaciente;
     private javax.swing.JPanel conteudoPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel medicoPanel;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel pacientePanel;
