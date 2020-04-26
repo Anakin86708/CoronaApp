@@ -7,6 +7,7 @@ public class Pessoa {
     private String email;
     private String cpf;
     private String telefone;
+    private int idioma;
     private String bairro;
     private String cidade;
     private String estado;
@@ -14,24 +15,26 @@ public class Pessoa {
     private String senha;
 
     /**
-     *
+     * 
      * @param idPessoa
      * @param nome
      * @param email
      * @param cpf
      * @param telefone
+     * @param idioma
      * @param bairro
      * @param cidade
      * @param estado
      * @param pais
      * @param senha
      */
-    public Pessoa(int idPessoa, String nome, String email, String cpf, String telefone, String bairro, String cidade, String estado, String pais, String senha) {
+    public Pessoa(int idPessoa, String nome, String email, String cpf, String telefone, int idioma, String bairro, String cidade, String estado, String pais, String senha) {
         this.idPessoa = idPessoa;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.idioma = idioma;
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
@@ -41,6 +44,14 @@ public class Pessoa {
 
     public void cadastrar() {
 
+    }
+
+    public int getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(int idioma) {
+        this.idioma = idioma;
     }
 
     public int getIdPessoa() {
