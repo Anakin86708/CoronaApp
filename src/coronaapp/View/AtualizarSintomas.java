@@ -5,6 +5,9 @@
  */
 package coronaapp.View;
 
+import coronaapp.Sintomas;
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +16,43 @@ import javax.swing.JOptionPane;
  */
 public class AtualizarSintomas extends javax.swing.JFrame {
 
+    ArrayList<JCheckBox> listCheckBoxsSintomas = new ArrayList<>();
+    Sintomas sintomas = null;
+    Menu menu = null;
+
+    private final String[] arraySintomas = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar"};
+
+    public AtualizarSintomas(Menu menu, Sintomas sintomas) {
+        initComponents();
+        this.menu = menu;
+        this.sintomas = sintomas;
+        updateCheckBoxSintomas();
+    }
+
     public AtualizarSintomas() {
         initComponents();
-        
-        //Mantém btns desabilitados enquanto não seleciona um sintoma
-        btnEditar.setEnabled(false);
-        btnExcluir.setEnabled(false);
+        updateCheckBoxSintomas();
+    }
 
+    private void updateCheckBoxSintomas() {
+        // Passa por todos os itens do array, criando uma checkbox que é armazenada em listCheckBoxsSintomas
+        int i = 0;
+        for (String item : arraySintomas) {
+            listCheckBoxsSintomas.add(new JCheckBox(item));
+            sintomasPanel.add(listCheckBoxsSintomas.get(i));
+            listCheckBoxsSintomas.get(i).setVisible(true);
+            i++;
+        }
+        if (sintomas != null) {
+            i = 0;
+            for (String item : arraySintomas) {
+                boolean contemSintoma = sintomas.getSintomasApresentados().contains(item);
+                listCheckBoxsSintomas.get(i).setSelected(contemSintoma);
+                i++;
+            }
+        }
+        sintomasPanel.updateUI();
+        conteudoPanel.updateUI();
     }
 
     /**
@@ -35,11 +68,10 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         conteudoPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listSintomas = new javax.swing.JList<>();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnAdicionar = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        sintomasPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -64,7 +96,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addContainerGap())
         );
@@ -78,56 +110,57 @@ public class AtualizarSintomas extends javax.swing.JFrame {
                     .addGroup(topPanelLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(btnVoltar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        listSintomas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Sintoma: Sintoma1 - Gravidade: Gravidade1", "Sintoma: Sintoma2 - Gravidade: Gravidade2", "Sintoma: Sintoma3 - Gravidade: Gravidade3", "Sintoma: Sintoma4 - Gravidade: Gravidade4", "Sintoma: Sintoma5 - Gravidade: Gravidade5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listSintomas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listSintomas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listSintomas.setMinimumSize(new java.awt.Dimension(33, 158));
-        listSintomas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listSintomasMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(listSintomas);
-
-        btnEditar.setText("Editar");
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
 
-        btnAdicionar.setText("Adicionar");
+        jLabel1.setText("Selecione os sintomas que você apresenta:");
+
+        sintomasPanel.setLayout(new java.awt.GridLayout(0, 1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sintomasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sintomasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout conteudoPanelLayout = new javax.swing.GroupLayout(conteudoPanel);
         conteudoPanel.setLayout(conteudoPanelLayout);
         conteudoPanelLayout.setHorizontalGroup(
             conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(conteudoPanelLayout.createSequentialGroup()
-                .addComponent(btnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdicionar))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnEnviar))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         conteudoPanelLayout.setVerticalGroup(
             conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(conteudoPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnAdicionar)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEnviar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,30 +186,55 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        Menu menu = new Menu(false);
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-        this.setVisible(false);
+        // Retorna para o local correto
+        if (menu != null) {
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(null);
+        } else {
+            backLogin();
+        }
+        this.dispose();
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void listSintomasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSintomasMouseClicked
-        // TODO add your handling code here:
-        btnEditar.setEnabled(true);
-        btnExcluir.setEnabled(true);
-    }//GEN-LAST:event_listSintomasMouseClicked
+    private void backLogin() {
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(this);
+    }
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int selecionado = listSintomas.getSelectedIndex();
-        if (selecionado != -1) {
-            int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir o sintoma selecionado?", "Remover sintoma", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (ans == JOptionPane.YES_OPTION) {
-                // Remover selecionado
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // Passa por todas as checkbox e adiciona os sintomas selecionados
+        if (sintomas == null) {
+            // Caso em que está sendo feito o cadastro
+            sintomas = new Sintomas();
+            createSintomasFromCheckBox();
+            if (sintomas.getSintomasApresentados().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Você não possui sintomas relacionados ao Covid-19", "Não há sintomas", JOptionPane.INFORMATION_MESSAGE);
+                backLogin();
+            } else {
+                Cadastro cadastro = new Cadastro(sintomas);
+                cadastro.setVisible(true);
+                cadastro.setLocationRelativeTo(this);
             }
         } else {
-            JOptionPane.showMessageDialog(this,"Selecione um sintoma primeiro", "Remover sintoma", JOptionPane.ERROR_MESSAGE);
+            // Caso em que está sendo alterado
+            sintomas.clearSintomas();
+            createSintomasFromCheckBox();
+            menu.updateSintomasPaciente(sintomas);
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(this);
         }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void createSintomasFromCheckBox() {
+        for (int i = 0; i < arraySintomas.length; i++) {
+            if (listCheckBoxsSintomas.get(i).isSelected()) {
+                sintomas.addSintoma(arraySintomas[i]);
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -212,16 +270,15 @@ public class AtualizarSintomas extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel conteudoPanel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listSintomas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel sintomasPanel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
