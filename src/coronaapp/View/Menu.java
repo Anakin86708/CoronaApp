@@ -35,7 +35,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.paciente = p;
         configureView(false);
-        nomeLabel.setText("Olá, " + paciente.getNome() + "! Gravidade: " + String.format("%.2f%%",paciente.getPrioridade()));
+        nomeLabel.setText("Olá, " + paciente.getNome() + "! Gravidade: " + String.format("%.2f%%", paciente.getPrioridade()));
     }
 
     public Menu(EquipeMedica em) {
@@ -403,7 +403,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnMarcarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarVisitaActionPerformed
-        // TODO add your handling code here:
+        AgendarVisita visita = new AgendarVisita(this,equipeMedica);
+        visita.setLocationRelativeTo(this);
+        this.setVisible(false);
+        visita.setVisible(true);
     }//GEN-LAST:event_btnMarcarVisitaActionPerformed
 
     private void messageError(Exception e) throws HeadlessException {
