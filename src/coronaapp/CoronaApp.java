@@ -12,7 +12,7 @@ import coronaapp.View.*;
  */
 public class CoronaApp {
     
-    public final String[] sintomasGerais = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
+    public static final String[] sintomasGerais = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
 
     /**
      * @param args the command line arguments
