@@ -1,16 +1,19 @@
 package coronaapp;
 
-public class Mensagem {
-	private String data;
-	private String texto;
-	private String remetente;
-	private String destinatario;
+import java.util.Date;
 
-    public String getData() {
+public class Mensagem {
+
+    private Date data;
+    private String texto;
+    private String remetente;
+    private String destinatario;
+
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
