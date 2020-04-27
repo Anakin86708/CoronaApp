@@ -17,6 +17,7 @@ public class Mensagens extends javax.swing.JFrame {
 
     /**
      * Creates new form Mensagens
+     * @param equipeMedica
      */
     public Mensagens(boolean equipeMedica) {
         initComponents();

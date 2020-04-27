@@ -5,6 +5,7 @@
  */
 package coronaapp;
 import coronaapp.View.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,7 @@ import coronaapp.View.*;
 public class CoronaApp {
     
     public static final String[] sintomasGerais = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
+    public static ArrayList<Visita> visitasAgendadas = new ArrayList<>();
 
     /**
      * @param args the command line arguments
