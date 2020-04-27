@@ -70,7 +70,9 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         equipeMedicaBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                listCheckBoxsSintomas.forEach((item) -> {
+                    item.setEnabled(!equipeMedicaBox.isSelected());
+                });
             }
         });
     }
@@ -209,7 +211,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         // Retorna para o local correto
         if (menu != null) {
             menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
+            menu.setLocationRelativeTo(this);
         } else {
             backLogin();
         }
@@ -229,11 +231,11 @@ public class AtualizarSintomas extends javax.swing.JFrame {
             // Caso em que está sendo feito o cadastro
             sintomas = new Sintomas();
             createSintomasFromCheckBox();
-            if (sintomas.getSintomasApresentados().isEmpty()) {
+            if (sintomas.getSintomasApresentados().isEmpty() && !equipeMedicaBox.isSelected()) {
                 JOptionPane.showMessageDialog(this, "Você não possui sintomas relacionados ao Covid-19", "Não há sintomas", JOptionPane.INFORMATION_MESSAGE);
                 backLogin();
             } else {
-                Cadastro cadastro = new Cadastro(sintomas);
+                Cadastro cadastro = new Cadastro(sintomas,equipeMedicaBox.isSelected());
                 cadastro.setVisible(true);
                 cadastro.setLocationRelativeTo(this);
             }
