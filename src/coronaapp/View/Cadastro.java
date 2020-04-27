@@ -33,6 +33,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
+     *
      * @param sintomas
      * @param isEquipeMedica
      */
@@ -460,16 +461,17 @@ public class Cadastro extends javax.swing.JFrame {
                     equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
-                    paciente = new Paciente("", "", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    paciente = new Paciente("", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(paciente);
                 }
+                JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                menu.setVisible(true);
+                menu.setLocationRelativeTo(this);
+                this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Não foi possível reazizar esta ação!\nErro:" + e.getMessage(), "Erro do executar ação", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(this);
-            this.dispose();
+
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -552,7 +554,7 @@ public class Cadastro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Cadastro(null,true).setVisible(true);
+                new Cadastro(null, true).setVisible(true);
             }
         });
     }
