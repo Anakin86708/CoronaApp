@@ -12,6 +12,7 @@ import coronaapp.Sintomas;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class Mensagens extends javax.swing.JFrame {
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
     public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
+    private DefaultListModel textosMensagens = new DefaultListModel();
             
     public Mensagens(boolean isEquipeMedica, EquipeMedica equipeMedica) {
         initComponents();        
@@ -36,8 +38,18 @@ public class Mensagens extends javax.swing.JFrame {
         this.paciente = paciente;
         this.isEquipeMedica = isEquipeMedica;
         Login login = new Login();
-        EquipeMedica e = new EquipeMedica("123",1,"E1","e@gmail.com","111.111.111-11","(111)11111-1111",1,"asdasd","asdasd","asdsa","asdada","123");
-        login.equipeMedicasInstanciados.add(e);
+        for(Mensagem msg : mensagens){
+            if(msg.getDestinatario() == paciente.getIdPessoa()){
+                String nomeRemetente = null;
+                for(EquipeMedica em : login.equipeMedicasInstanciados){
+                    if(em.getIdPessoa()==msg.getRemetente()){
+                        nomeRemetente = em.getNome();
+                        break;
+                    }
+                }
+                textosMensagens.addElement("Data: "+msg.getData()+"Remetente: "+nomeRemetente);
+            }
+        }
     }
 
     /**
@@ -150,11 +162,7 @@ public class Mensagens extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        listMensagens.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listMensagens.setModel(textosMensagens);
         jScrollPane1.setViewportView(listMensagens);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,7 +207,7 @@ public class Mensagens extends javax.swing.JFrame {
         if (selecionado != -1) {
             int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagem selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ans == JOptionPane.YES_OPTION) {
-                //listMensagens.remove(selecionado);
+                mensagens.remove(selecionado);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
