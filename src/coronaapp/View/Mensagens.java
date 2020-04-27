@@ -25,19 +25,22 @@ public class Mensagens extends javax.swing.JFrame {
     private boolean isEquipeMedica;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
+    private Menu menu = null;
     public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
     private DefaultListModel textosMensagens = new DefaultListModel();
             
-    public Mensagens(boolean isEquipeMedica, EquipeMedica equipeMedica) {
+    public Mensagens(Menu menu,boolean isEquipeMedica, EquipeMedica equipeMedica) {
         initComponents();        
         this.equipeMedica = equipeMedica;
         this.isEquipeMedica = isEquipeMedica;
+        this.menu = menu;
     }
     
-    public Mensagens(boolean isEquipeMedica, Paciente paciente) {
+    public Mensagens(Menu menu, boolean isEquipeMedica, Paciente paciente) {
         initComponents();
         this.paciente = paciente;
         this.isEquipeMedica = isEquipeMedica;
+        this.menu = menu;
         Login login = new Login();
         for(Mensagem msg : mensagens){
             if(msg.getDestinatario() == paciente.getIdPessoa()){
@@ -197,7 +200,6 @@ public class Mensagens extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // É preciso alterar o bool para o valor correto posteriormente
-        Menu menu = new Menu(this.isEquipeMedica);
         menu.setVisible(true);
         menu.setLocationRelativeTo(this);
         this.setVisible(false);
