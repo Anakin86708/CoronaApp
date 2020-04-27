@@ -457,11 +457,15 @@ public class Cadastro extends javax.swing.JFrame {
             updateVariables();
             try {
                 if (checkEquipeMedica.isSelected()) {
-                    String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                    String localTrabalho = null;
+                    String regex = "\\w{2}\\d{6}"; // Regex para match com o local de trabalho
+                    do {                        
+                        localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                    } while (!localTrabalho.matches(regex));
                     equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
-                    paciente = new Paciente("", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    paciente = new Paciente("", sintoma, Login.pacientesInstanciados.size(), nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(paciente);
                 }
                 JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
