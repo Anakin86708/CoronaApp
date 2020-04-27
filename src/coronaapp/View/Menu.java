@@ -347,7 +347,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensMedicasActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(true);
+            Mensagens mensagens = new Mensagens(true, equipeMedica);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -382,7 +382,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensPacienteActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(false);
+            Mensagens mensagens = new Mensagens(false, paciente);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
