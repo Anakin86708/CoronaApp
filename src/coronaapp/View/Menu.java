@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
 
     private boolean isEquipeMedica;
-    private Paciente paciente;
-    private EquipeMedica equipeMedica;
+    private Paciente paciente = null;
+    private EquipeMedica equipeMedica = null;
 
     /**
      * Creates new form Menu
@@ -215,6 +215,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnMarcarVisita.setText("Marcar visita");
+        btnMarcarVisita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMarcarVisitaActionPerformed(evt);
+            }
+        });
 
         btnHistoricoMedico.setText("Verificar histórico médico");
         btnHistoricoMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -292,9 +297,15 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         try {
-            Login login = new Login();
-            login.setVisible(true);
-            login.setLocationRelativeTo(this);
+            if (paciente != null && equipeMedica == null) {
+                Login login = new Login(paciente);
+                login.setVisible(true);
+                login.setLocationRelativeTo(this);
+            } else {
+                Login login = new Login(equipeMedica);
+                login.setVisible(true);
+                login.setLocationRelativeTo(this);
+            }
             this.setVisible(false);
         } catch (Exception e) {
             messageError(e);
@@ -326,7 +337,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnAtualizarSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarSintomasActionPerformed
         try {
-            AtualizarSintomas atualizarSintomas = new AtualizarSintomas(this,paciente.getSintomas());
+            AtualizarSintomas atualizarSintomas = new AtualizarSintomas(this, paciente.getSintomas());
             atualizarSintomas.setVisible(true);
             atualizarSintomas.setLocationRelativeTo(null);
             this.setVisible(false);
@@ -391,6 +402,10 @@ public class Menu extends javax.swing.JFrame {
             messageError(e);
         }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+
+    private void btnMarcarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarVisitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMarcarVisitaActionPerformed
 
     private void messageError(Exception e) throws HeadlessException {
         JOptionPane.showMessageDialog(this, "Não foi possível reazizar esta ação. Faça login novamente!\nErro:" + e.getMessage(), "Erro do executar ação", JOptionPane.ERROR_MESSAGE);
