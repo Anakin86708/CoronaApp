@@ -5,6 +5,7 @@
  */
 package coronaapp.View;
 
+import coronaapp.CoronaApp;
 import coronaapp.Sintomas;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -24,7 +25,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     Menu menu = null;
     JCheckBox equipeMedicaBox = null;
 
-    private final String[] arraySintomas = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
+    private final String[] arraySintomas = new CoronaApp().sintomasGerais;;
 
     public AtualizarSintomas(Menu menu, Sintomas sintomas) {
         initComponents();
