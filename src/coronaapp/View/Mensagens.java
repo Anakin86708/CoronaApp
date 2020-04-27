@@ -32,6 +32,19 @@ public class Mensagens extends javax.swing.JFrame {
         initComponents();        
         this.equipeMedica = equipeMedica;
         this.isEquipeMedica = isEquipeMedica;
+        Login login = new Login();
+        for(Mensagem msg : mensagens){
+            if(msg.getDestinatario() == equipeMedica.getIdPessoa()){
+                String nomeRemetente = null;
+                for(EquipeMedica em : login.equipeMedicasInstanciados){
+                    if(em.getIdPessoa()==msg.getRemetente()){
+                        nomeRemetente = em.getNome();
+                        break;
+                    }
+                }
+                textosMensagens.addElement(msg.toString());
+            }
+        }
     }
     
     public Mensagens(boolean isEquipeMedica, Paciente paciente) {
@@ -48,7 +61,7 @@ public class Mensagens extends javax.swing.JFrame {
                         break;
                     }
                 }
-                textosMensagens.addElement("Data: "+msg.getData()+"Remetente: "+nomeRemetente);
+                textosMensagens.addElement(msg.toString());
             }
         }
     }
