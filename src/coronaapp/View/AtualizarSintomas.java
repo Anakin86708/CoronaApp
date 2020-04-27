@@ -6,9 +6,12 @@
 package coronaapp.View;
 
 import coronaapp.Sintomas;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
 
 /**
  *
@@ -19,8 +22,9 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     ArrayList<JCheckBox> listCheckBoxsSintomas = new ArrayList<>();
     Sintomas sintomas = null;
     Menu menu = null;
+    JCheckBox equipeMedicaBox = null;
 
-    private final String[] arraySintomas = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar"};
+    private final String[] arraySintomas = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
 
     public AtualizarSintomas(Menu menu, Sintomas sintomas) {
         initComponents();
@@ -32,6 +36,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     public AtualizarSintomas() {
         initComponents();
         updateCheckBoxSintomas();
+        showEquipeMedicaCheckBox();
     }
 
     private void updateCheckBoxSintomas() {
@@ -53,6 +58,21 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         }
         sintomasPanel.updateUI();
         conteudoPanel.updateUI();
+    }
+    
+    private void showEquipeMedicaCheckBox(){
+        sintomasPanel.add(new JSeparator());
+        equipeMedicaBox = new JCheckBox("Represento equipe médica");
+        sintomasPanel.add(equipeMedicaBox);
+        sintomasPanel.updateUI();
+        
+        // Cria o listenner caso o estado da equipe médica seja alterado
+        equipeMedicaBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     /**
