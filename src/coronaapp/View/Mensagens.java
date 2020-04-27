@@ -6,9 +6,11 @@
 package coronaapp.View;
 
 import coronaapp.EquipeMedica;
+import coronaapp.Mensagem;
 import coronaapp.Paciente;
 import coronaapp.Sintomas;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -21,7 +23,8 @@ public class Mensagens extends javax.swing.JFrame {
     private boolean isEquipeMedica;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
-
+    public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
+            
     public Mensagens(boolean isEquipeMedica, EquipeMedica equipeMedica) {
         initComponents();        
         this.equipeMedica = equipeMedica;
@@ -32,6 +35,9 @@ public class Mensagens extends javax.swing.JFrame {
         initComponents();
         this.paciente = paciente;
         this.isEquipeMedica = isEquipeMedica;
+        Login login = new Login();
+        EquipeMedica e = new EquipeMedica("123",1,"E1","e@gmail.com","111.111.111-11","(111)11111-1111",1,"asdasd","asdasd","asdsa","asdada","123");
+        login.equipeMedicasInstanciados.add(e);
     }
 
     /**
@@ -201,19 +207,47 @@ public class Mensagens extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirMensagemActionPerformed
 
     private void btnNovaMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaMensagemActionPerformed
+        int idRemetente = 0;
         Login login = new Login();
         List<String> nomes = new ArrayList<String>();
         if(this.isEquipeMedica){
+            idRemetente = this.equipeMedica.getIdPessoa();
             for(Paciente p : login.pacientesInstanciados){
                 nomes.add(p.getNome()); 
             }
         }
         else{
+            idRemetente = this.paciente.getIdPessoa();
             for(EquipeMedica e : login.equipeMedicasInstanciados){
                 nomes.add(e.getNome()); 
             }
         }
-        String destinatario = (String)JOptionPane.showInputDialog(this,"Selecione o remetente:","Remetente:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
+        String destinatario = (String)JOptionPane.showInputDialog(this,"Selecione o Destinatario:","Destinatário:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
+        int idDestinatario = 0;
+        if(this.isEquipeMedica){
+            for(Paciente p : login.pacientesInstanciados){
+                if(destinatario.equals(p.getNome())){
+                    idDestinatario = p.getIdPessoa();
+                    break;
+                }
+            }
+        } else {
+            for(EquipeMedica e : login.equipeMedicasInstanciados){
+                if(destinatario.equals(e.getNome())){
+                    idDestinatario = e.getIdPessoa();
+                    break;
+                }
+            }
+        }
+        String msg = JOptionPane.showInputDialog(this, "Digite sua mensagem: ");
+        if(msg.trim().isEmpty()){
+           
+        }
+        else{
+            Date data = new Date();
+            Mensagem mensagem = new Mensagem(data,msg,idRemetente,idDestinatario);
+            this.mensagens.add(mensagem);
+        }
     }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
     /**
