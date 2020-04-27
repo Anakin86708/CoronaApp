@@ -5,6 +5,11 @@
  */
 package coronaapp.View;
 
+import coronaapp.EquipeMedica;
+import coronaapp.Paciente;
+import coronaapp.Sintomas;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,14 +18,20 @@ import javax.swing.JOptionPane;
  */
 public class Mensagens extends javax.swing.JFrame {
     
-    private boolean equipeMedica;
+    private boolean isEquipeMedica;
+    private Paciente paciente = null;
+    private EquipeMedica equipeMedica = null;
 
-    /**
-     * Creates new form Mensagens
-     */
-    public Mensagens(boolean equipeMedica) {
-        initComponents();
+    public Mensagens(boolean isEquipeMedica, EquipeMedica equipeMedica) {
+        initComponents();        
         this.equipeMedica = equipeMedica;
+        this.isEquipeMedica = isEquipeMedica;
+    }
+    
+    public Mensagens(boolean isEquipeMedica, Paciente paciente) {
+        initComponents();
+        this.paciente = paciente;
+        this.isEquipeMedica = isEquipeMedica;
     }
 
     /**
@@ -32,6 +43,8 @@ public class Mensagens extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         topPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
@@ -41,6 +54,28 @@ public class Mensagens extends javax.swing.JFrame {
         btnExcluirMensagem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMensagens = new javax.swing.JList<>();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +110,11 @@ public class Mensagens extends javax.swing.JFrame {
         );
 
         btnNovaMensagem.setText("Nova mensagem");
+        btnNovaMensagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovaMensagemActionPerformed(evt);
+            }
+        });
 
         btnExcluirMensagem.setText("Excluir mensagem");
         btnExcluirMensagem.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +182,7 @@ public class Mensagens extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // É preciso alterar o bool para o valor correto posteriormente
-        Menu menu = new Menu(this.equipeMedica);
+        Menu menu = new Menu(this.isEquipeMedica);
         menu.setVisible(true);
         menu.setLocationRelativeTo(this);
         this.setVisible(false);
@@ -159,6 +199,22 @@ public class Mensagens extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirMensagemActionPerformed
+
+    private void btnNovaMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaMensagemActionPerformed
+        Login login = new Login();
+        List<String> nomes = new ArrayList<String>();
+        if(this.isEquipeMedica){
+            for(Paciente p : login.pacientesInstanciados){
+                nomes.add(p.getNome()); 
+            }
+        }
+        else{
+            for(EquipeMedica e : login.equipeMedicasInstanciados){
+                nomes.add(e.getNome()); 
+            }
+        }
+        String destinatario = (String)JOptionPane.showInputDialog(this,"Selecione o remetente:","Remetente:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
+    }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +256,8 @@ public class Mensagens extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirMensagem;
     private javax.swing.JButton btnNovaMensagem;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> listMensagens;
