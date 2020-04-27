@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Mensagens extends javax.swing.JFrame {
     
+
     private boolean isEquipeMedica;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
