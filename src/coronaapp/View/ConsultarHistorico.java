@@ -2,9 +2,10 @@ package coronaapp.View;
 
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import coronaapp.Paciente;
 
 public class ConsultarHistorico extends javax.swing.JFrame {
-
+    
     public ConsultarHistorico() {
         initComponents();
     }
@@ -231,12 +232,13 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        /*
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new ConsultarHistorico().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
