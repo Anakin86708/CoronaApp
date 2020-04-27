@@ -347,7 +347,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensMedicasActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(true, equipeMedica);
+            Mensagens mensagens = new Mensagens(this, true, equipeMedica);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -382,7 +382,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensPacienteActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(false, paciente);
+            Mensagens mensagens = new Mensagens(this, false, paciente);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -403,7 +403,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnMarcarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarVisitaActionPerformed
-        AgendarVisita visita = new AgendarVisita(this,equipeMedica);
+        AgendarVisita visita = new AgendarVisita(this, equipeMedica);
         visita.setLocationRelativeTo(this);
         this.setVisible(false);
         visita.setVisible(true);
