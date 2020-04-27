@@ -34,9 +34,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Paciente p) {
         initComponents();
         this.paciente = p;
-
         configureView(false);
-        nomeLabel.setText("Olá, " + paciente.getNome());
+        nomeLabel.setText("Olá, " + paciente.getNome() + "! Gravidade: " + String.format("%.2f%%",paciente.getPrioridade()));
     }
 
     public Menu(EquipeMedica em) {
