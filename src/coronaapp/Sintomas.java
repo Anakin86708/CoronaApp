@@ -7,7 +7,7 @@ import java.util.List;
 public class Sintomas {
 
     private List<String> sintomasApresentados;
-    private String gravidade;
+    private float gravidade;
 
     public Sintomas() {
         this.sintomasApresentados = new ArrayList<>();
@@ -20,23 +20,29 @@ public class Sintomas {
     public void addSintoma(String new_sintoma) {
         if (!sintomasApresentados.contains(new_sintoma)) {
             sintomasApresentados.add(new_sintoma);
+            calculaSintoma();
         }
     }
 
     public void addSintoma(String[] new_sintoma) {
         clearSintomas();
         sintomasApresentados.addAll(Arrays.asList(new_sintoma));
+        calculaSintoma();
     }
 
     public void clearSintomas() {
         sintomasApresentados = new ArrayList<>();
     }
 
-    public String getGravidade() {
+    public float getGravidade() {
+        calculaSintoma();
         return gravidade;
     }
 
-    public void setGravidade(String gravidade) {
-        this.gravidade = gravidade;
+    private void calculaSintoma(){
+        float total = new CoronaApp().sintomasGerais.length;
+        float possui = sintomasApresentados.size();
+        
+        gravidade = (float) (possui/total) * 100;
     }
 }
