@@ -34,10 +34,12 @@ public class Cadastro extends javax.swing.JFrame {
     /**
      * Creates new form Login
      * @param sintomas
+     * @param isEquipeMedica
      */
-    public Cadastro(Sintomas sintomas) {
-        this.sintoma = sintomas;
+    public Cadastro(Sintomas sintomas, boolean isEquipeMedica) {
         initComponents();
+        this.sintoma = sintomas;
+        checkEquipeMedica.setSelected(isEquipeMedica);
     }
 
     public Cadastro(Menu menu, Paciente paciente, Sintomas sintomas) {
@@ -180,6 +182,7 @@ public class Cadastro extends javax.swing.JFrame {
         });
 
         checkEquipeMedica.setText("Represento equipe médica");
+        checkEquipeMedica.setEnabled(false);
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -356,11 +359,9 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(btnEnviar)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(checkEquipeMedica)
-                        .addGap(25, 25, 25))))
+                        .addComponent(btnEnviar))
+                    .addComponent(checkEquipeMedica))
+                .addContainerGap())
         );
 
         titleLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -551,7 +552,7 @@ public class Cadastro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Cadastro(null).setVisible(true);
+                new Cadastro(null,true).setVisible(true);
             }
         });
     }
