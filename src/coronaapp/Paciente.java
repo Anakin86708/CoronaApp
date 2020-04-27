@@ -8,7 +8,6 @@ public class Paciente extends Pessoa {
 
     /**
      *
-     * @param prioridade
      * @param status
      * @param sintomas
      * @param idPessoa
