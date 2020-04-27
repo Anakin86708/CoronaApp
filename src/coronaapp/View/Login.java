@@ -1,9 +1,28 @@
 package coronaapp.View;
 
+import coronaapp.EquipeMedica;
+import coronaapp.Paciente;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
+
+    private static List<Paciente> pacientesInstanciados = new ArrayList<>();
+    private static List<EquipeMedica> equipeMedicasInstanciados = new ArrayList<>();
 
     public Login() {
         initComponents();
+    }
+
+    public Login(Paciente paciente) {
+        initComponents();
+        pacientesInstanciados.add(paciente);
+    }
+
+    public Login(EquipeMedica equipeMedica) {
+        initComponents();
+        equipeMedicasInstanciados.add(equipeMedica);
     }
 
     /**
@@ -181,11 +200,29 @@ public class Login extends javax.swing.JFrame {
         //Se for equipe médica
         //Menu menu = new Menu(true);
         //Se for paciente
-        Menu menu = new Menu(false);
+        String loginCPF = txtCPF.getText();
+        String loginSenha = new String(txtSenha.getPassword());
+        Menu menu = null;
 
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-        this.setVisible(false);
+        for (Paciente item : pacientesInstanciados) {
+            if (item.getCpf().equals(loginCPF) && item.getSenha().equals(loginSenha)) {
+                menu = new Menu(item);
+            }
+        }
+        for (EquipeMedica item : equipeMedicasInstanciados) {
+            if (item.getCpf().equals(loginCPF) && item.getSenha().equals(loginSenha)) {
+                menu = new Menu(item);
+            }
+        }
+        if (menu != null) {
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(null);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Login incorreto.\nVerifique seu CPF e senha.", "Não foi possível completar login!", JOptionPane.WARNING_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
