@@ -46,4 +46,10 @@ public class Mensagem {
     public void setDestinatario(int idDestinatario) {
         this.idDestinatario = idDestinatario;
     }
+
+    @Override
+    public String toString() {
+        return "Mensagem{" + "data=" + data + ", texto=" + texto + ", idRemetente=" + idRemetente + ", idDestinatario=" + idDestinatario + '}';
+    }
+    
 }
