@@ -1,16 +1,25 @@
 package coronaapp;
 
-public class Mensagem {
-	private String data;
-	private String texto;
-	private String remetente;
-	private String destinatario;
+import java.util.Date;
 
-    public String getData() {
+public class Mensagem {
+	private Date data;
+	private String texto;
+	private int idRemetente;
+	private int idDestinatario;
+        
+   public Mensagem(Date data, String texto, int idRemetente, int idDestinatario){
+       this.data = data;
+       this.texto = texto;
+       this.idRemetente = idRemetente;
+       this.idDestinatario = idDestinatario;
+   }
+
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -22,19 +31,19 @@ public class Mensagem {
         this.texto = texto;
     }
 
-    public String getRemetente() {
-        return remetente;
+    public int getRemetente() {
+        return idRemetente;
     }
 
-    public void setRemetente(String remetente) {
-        this.remetente = remetente;
+    public void setRemetente(int idRemetente) {
+        this.idRemetente = idRemetente;
     }
 
-    public String getDestinatario() {
-        return destinatario;
+    public int getDestinatario() {
+        return idDestinatario;
     }
 
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
+    public void setDestinatario(int idDestinatario) {
+        this.idDestinatario = idDestinatario;
     }
 }
