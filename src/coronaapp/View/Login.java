@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    private static List<Paciente> pacientesInstanciados = new ArrayList<>();
-    private static List<EquipeMedica> equipeMedicasInstanciados = new ArrayList<>();
+    public static List<Paciente> pacientesInstanciados = new ArrayList<>();
+    public static List<EquipeMedica> equipeMedicasInstanciados = new ArrayList<>();
 
     public Login() {
         initComponents();
