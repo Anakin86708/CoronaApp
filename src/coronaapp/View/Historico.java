@@ -423,10 +423,10 @@ public class Historico extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        if(paciente.getListaHistoricoMedico() != null){
+        if(this.paciente.getListaHistoricoMedico() != null){
             listarHistorico();
         }
-        AdicionarHistorico adicionarHistorico = new AdicionarHistorico(paciente, this);
+        AdicionarHistorico adicionarHistorico = new AdicionarHistorico(this.paciente, this);
         adicionarHistorico.setVisible(true);
         adicionarHistorico.setLocationRelativeTo(this);
     }//GEN-LAST:event_btnAdicionarActionPerformed
