@@ -42,10 +42,6 @@ public class Pessoa {
         this.senha = senha;
     }
 
-    public void cadastrar() {
-
-    }
-
     public int getIdioma() {
         return idioma;
     }
@@ -82,7 +78,7 @@ public class Pessoa {
         }
         return false;
     }
-
+    // Mais getters e setters comuns
     public String getCpf() {
         return cpf;
     }
