@@ -8,7 +8,9 @@ package coronaapp.View;
 import coronaapp.EquipeMedica;
 import coronaapp.Paciente;
 import coronaapp.Sintomas;
+import coronaapp.HistoricoMedico;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Cadastro extends javax.swing.JFrame {
     private EquipeMedica equipeMedica = null;
     private Sintomas sintoma = null;
     private Menu menu = null;
+    private ArrayList<HistoricoMedico> listaHistoricoMedico = null;
 
     public boolean setEmail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -460,7 +463,7 @@ public class Cadastro extends javax.swing.JFrame {
                     equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
-                    paciente = new Paciente("", "", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    paciente = new Paciente("", "", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha, this.listaHistoricoMedico);
                     menu = new Menu(paciente);
                 }
             } catch (Exception e) {
