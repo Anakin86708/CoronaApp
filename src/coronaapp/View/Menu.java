@@ -393,7 +393,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         try {
-            GerarRelatorio gerarRelatorio = new GerarRelatorio();
+            GerarRelatorio gerarRelatorio = new GerarRelatorio(this,equipeMedica);
             gerarRelatorio.setVisible(true);
             gerarRelatorio.setLocationRelativeTo(this);
             this.setVisible(false);
