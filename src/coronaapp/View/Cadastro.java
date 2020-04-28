@@ -33,6 +33,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
+     *
      * @param sintomas
      * @param isEquipeMedica
      */
@@ -460,7 +461,7 @@ public class Cadastro extends javax.swing.JFrame {
                     equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
-                    paciente = new Paciente("", "", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    paciente = new Paciente("", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(paciente);
                 }
             } catch (Exception e) {
@@ -552,7 +553,7 @@ public class Cadastro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Cadastro(null,true).setVisible(true);
+                new Cadastro(null, true).setVisible(true);
             }
         });
     }
