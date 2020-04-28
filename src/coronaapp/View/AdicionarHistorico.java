@@ -19,13 +19,17 @@ public class AdicionarHistorico extends javax.swing.JFrame {
     
     private HistoricoMedico historicoMedico;
     private ArrayList<HistoricoMedico> listaHistoricoMedico;
+    private Paciente paciente;
     private Historico interfaceHistorico;
     private static int idHistorico = 1;
     /**
      * Creates new form Login
+     * @param paciente
+     * @param historico
      */
     public AdicionarHistorico(Paciente paciente, Historico historico) {
-        this.listaHistoricoMedico = paciente.getListaHistoricoMedico();
+        listaHistoricoMedico = paciente.getListaHistoricoMedico();
+        this.paciente = paciente;
         this.interfaceHistorico = historico;
         initComponents();
     }
@@ -241,7 +245,7 @@ public class AdicionarHistorico extends javax.swing.JFrame {
             // criando histórico médico
             HistoricoMedico historico = new HistoricoMedico(idHistorico, diagnostico, data, medicacao, exame);
             // adicionado à lista de histórico médico
-            
+            listaHistoricoMedico = new ArrayList<HistoricoMedico>();
             // erro na lista de historico
             this.listaHistoricoMedico.add(historico);
             interfaceHistorico.setVisible(true);
