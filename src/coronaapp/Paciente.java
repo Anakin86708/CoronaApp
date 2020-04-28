@@ -30,7 +30,7 @@ public class Paciente extends Pessoa {
         this.prioridade = prioridade;
         this.status = status;
         this.sintomas = sintomas;
-        this.listaHistoricoMedico = historicoMedico;
+        this.listaHistoricoMedico = listaHistoricoMedico;
     }
 
     public Sintomas getSintomas() {
