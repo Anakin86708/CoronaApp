@@ -358,7 +358,6 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMensagensMedicasActionPerformed
 
     private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
-
         // medico
         ConsultarHistorico consultarHistorico = new ConsultarHistorico(this);
         consultarHistorico.setVisible(true);
