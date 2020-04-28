@@ -168,7 +168,6 @@ public class ConsultarHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
         if("   .   .   -  ".equals(txtCPF.getText())){
             JOptionPane.showMessageDialog(topPanel, "Digite o CPF do paciente!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         }else{
