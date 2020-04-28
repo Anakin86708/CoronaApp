@@ -75,6 +75,11 @@ public class Mensagens extends javax.swing.JFrame {
         );
 
         btnNovaMensagem.setText("Nova mensagem");
+        btnNovaMensagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovaMensagemActionPerformed(evt);
+            }
+        });
 
         btnExcluirMensagem.setText("Excluir mensagem");
         btnExcluirMensagem.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +164,10 @@ public class Mensagens extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirMensagemActionPerformed
+
+    private void btnNovaMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaMensagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
     /**
      * @param args the command line arguments

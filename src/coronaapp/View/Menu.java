@@ -358,21 +358,18 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMensagensMedicasActionPerformed
 
     private void btnHistoricoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoMedicoActionPerformed
-        /*
-        Historico historico = new Historico(this.isEquipeMedica);
-        historico.setVisible(true);
-        historico.setLocationRelativeTo(this);
-        this.setVisible(false);
-         */
-        ConsultarHistorico consultarHistorico = new ConsultarHistorico();
+
+        // medico
+        ConsultarHistorico consultarHistorico = new ConsultarHistorico(this);
         consultarHistorico.setVisible(true);
         consultarHistorico.setLocationRelativeTo(this);
         this.setVisible(false);
     }//GEN-LAST:event_btnHistoricoMedicoActionPerformed
 
     private void btnVerificarHistoricoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarHistoricoPacienteActionPerformed
+        // paciente
         try {
-            Historico historico = new Historico(this.isEquipeMedica);
+            Historico historico = new Historico(this.isEquipeMedica, paciente, this);
             historico.setVisible(true);
             historico.setLocationRelativeTo(this);
             this.setVisible(false);

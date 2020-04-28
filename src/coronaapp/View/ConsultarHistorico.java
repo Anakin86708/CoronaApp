@@ -3,10 +3,17 @@ package coronaapp.View;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import coronaapp.Paciente;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConsultarHistorico extends javax.swing.JFrame {
     
-    public ConsultarHistorico() {
+    private Login login;
+    private Menu menu;
+    private Historico historico = null;
+    
+    public ConsultarHistorico(Menu menu) {
+        this.menu = menu;
         initComponents();
     }
 
@@ -155,10 +162,9 @@ public class ConsultarHistorico extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        Menu menu = new Menu(true);
         menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-        this.setVisible((false));
+        menu.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
@@ -166,10 +172,21 @@ public class ConsultarHistorico extends javax.swing.JFrame {
         if("   .   .   -  ".equals(txtCPF.getText())){
             JOptionPane.showMessageDialog(topPanel, "Digite o CPF do paciente!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         }else{
-            Historico historico = new Historico(true);
-            historico.setVisible(true);
-            historico.setLocationRelativeTo(this);
-            this.setVisible(false);    
+            List<Paciente> listaPacientes = login.pacientesInstanciados;
+            String procurarCPF = txtCPF.getText();
+            // código para procurar paciente pelo CPF
+            for(Paciente paciente : listaPacientes){
+                if(paciente.getCpf().equals(procurarCPF)){
+                    historico = new Historico(true, paciente, menu, this);
+                }
+            }
+            if(historico != null){
+                historico.setVisible(true);
+                historico.setLocationRelativeTo(this);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "Este CPF não existe.\nVerifique o CPF.", "Não foi possível completar login!", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 

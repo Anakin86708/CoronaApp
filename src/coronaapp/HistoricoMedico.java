@@ -1,12 +1,23 @@
 package coronaapp;
+import java.util.Date;
 
 public class HistoricoMedico {
-	private int idHistorico;
-	private String diagnostico;
-	private String data;
-	private String medicacao;
-	private String exame;
+    private int idHistorico;
+    private String diagnostico;
+    private Date data;
+    private String medicacao;
+    private String exame;
 
+    public HistoricoMedico(int idHistorico, String diagnostico, Date data, String medicacao, String exame) {
+        this.idHistorico = idHistorico;
+        this.diagnostico = diagnostico;
+        this.data = data;
+        this.medicacao = medicacao;
+        this.exame = exame;
+    }
+    
+    
+        
     public int getIdHistorico() {
         return idHistorico;
     }
@@ -23,11 +34,11 @@ public class HistoricoMedico {
         this.diagnostico = diagnostico;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -46,6 +57,4 @@ public class HistoricoMedico {
     public void setExame(String exame) {
         this.exame = exame;
     }
-        
-        
 }

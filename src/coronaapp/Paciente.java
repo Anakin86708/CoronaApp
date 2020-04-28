@@ -25,24 +25,7 @@ public class Paciente extends Pessoa {
      * @param pais
      * @param senha
      */
-    
-
-    public Paciente(
-            String prioridade, 
-            String status, 
-            Sintomas sintomas, 
-            int idPessoa, 
-            String nome, 
-            String email, 
-            String cpf, 
-            String telefone, 
-            int idioma, 
-            String bairro, 
-            String cidade, 
-            String estado, 
-            String pais, 
-            String senha, 
-            ArrayList<HistoricoMedico> historicoMedico) {
+    public Paciente(String status, Sintomas sintomas, int idPessoa, String nome, String email, String cpf, String telefone, int idioma, String bairro, String cidade, String estado, String pais, String senha) {
         super(idPessoa, nome, email, cpf, telefone, idioma, bairro, cidade, estado, pais, senha);
         this.prioridade = prioridade;
         this.status = status;
