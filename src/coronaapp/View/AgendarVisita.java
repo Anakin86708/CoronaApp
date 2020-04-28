@@ -204,13 +204,7 @@ public class AgendarVisita extends javax.swing.JFrame {
         if (selecionado >= 0) {
             Date date = (Date) spinnerDate.getValue();
             String cpfPaciente = Login.pacientesInstanciados.get(selecionado).getCpf();
-            String cpfEquipeMedica = equipeMedica.getCpf();
-            try {
-                Visita visita = new Visita(date, cpfEquipeMedica, cpfPaciente);
-                JOptionPane.showMessageDialog(this, "Visita agendada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Não foi possível agendar a visita!\nErro:" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            equipeMedica.agendarVisita(date, cpfPaciente);            
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um paciente primeiramente", "Erro", JOptionPane.ERROR_MESSAGE);
         }

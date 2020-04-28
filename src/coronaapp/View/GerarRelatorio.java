@@ -5,6 +5,18 @@
  */
 package coronaapp.View;
 
+import coronaapp.CoronaApp;
+import coronaapp.EquipeMedica;
+import coronaapp.Paciente;
+import coronaapp.Relatorio;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,10 +24,18 @@ import javax.swing.JOptionPane;
  * @author silva
  */
 public class GerarRelatorio extends javax.swing.JFrame {
-    
-    public GerarRelatorio() {
+
+    private Menu menu;
+    private EquipeMedica equipeMedica;
+
+    public GerarRelatorio(Menu menu, EquipeMedica equipeMedica) {
         initComponents();
-        btnGerarRelatorio.setEnabled(false);
+        this.menu = menu;
+        this.equipeMedica = equipeMedica;
+        btnGerarRelatorioSintomas.setEnabled(false);
+        gerarRegiao();
+        gerarHospitais();
+        gerarSintomas();
     }
 
     /**
@@ -32,14 +52,16 @@ public class GerarRelatorio extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         conteudoPanel = new javax.swing.JPanel();
-        btnGerarRelatorio = new javax.swing.JButton();
+        btnGerarRelatorioSintomas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelRegiao = new javax.swing.JLabel();
-        fieldRegiao = new javax.swing.JTextField();
-        fieldHospital = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listSintomas = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
+        cmbRegiao = new javax.swing.JComboBox<>();
+        cmbHospital = new javax.swing.JComboBox<>();
+        btnGerarRelatorioRegiao = new javax.swing.JButton();
+        btnGerarRelatorioHospital = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -56,10 +78,10 @@ public class GerarRelatorio extends javax.swing.JFrame {
         setResizable(false);
         setSize(conteudoPanel.getSize());
         addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 formInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -82,7 +104,7 @@ public class GerarRelatorio extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addContainerGap())
         );
@@ -99,24 +121,16 @@ public class GerarRelatorio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnGerarRelatorio.setText("Gerar Relatório");
-        btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        btnGerarRelatorioSintomas.setText("Gerar Relatório");
+        btnGerarRelatorioSintomas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarRelatorioActionPerformed(evt);
+                btnGerarRelatorioSintomasActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Hospital:");
 
         labelRegiao.setText("Região");
-
-        fieldRegiao.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                fieldRegiaoInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
 
         listSintomas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Sintoma1 - Gravidade1", "Sintoma2 - Gravidade2", "Sintoma3 - Gravidade3", "Sintoma4 - Gravidade4", "Sintoma5 - Gravidade5" };
@@ -132,13 +146,31 @@ public class GerarRelatorio extends javax.swing.JFrame {
 
         jLabel2.setText("Sintomas:");
 
+        cmbRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbHospital.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnGerarRelatorioRegiao.setText("Gerar Relatório");
+        btnGerarRelatorioRegiao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioRegiaoActionPerformed(evt);
+            }
+        });
+
+        btnGerarRelatorioHospital.setText("Gerar Relatório");
+        btnGerarRelatorioHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioHospitalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout conteudoPanelLayout = new javax.swing.GroupLayout(conteudoPanel);
         conteudoPanel.setLayout(conteudoPanelLayout);
         conteudoPanelLayout.setHorizontalGroup(
             conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(conteudoPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGerarRelatorio))
+                .addComponent(btnGerarRelatorioSintomas))
             .addGroup(conteudoPanelLayout.createSequentialGroup()
                 .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(conteudoPanelLayout.createSequentialGroup()
@@ -150,27 +182,36 @@ public class GerarRelatorio extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldRegiao)
-                    .addComponent(fieldHospital)
-                    .addComponent(jScrollPane1)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addGroup(conteudoPanelLayout.createSequentialGroup()
+                        .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbHospital, javax.swing.GroupLayout.Alignment.LEADING, 0, 235, Short.MAX_VALUE)
+                            .addComponent(cmbRegiao, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGerarRelatorioRegiao)
+                            .addComponent(btnGerarRelatorioHospital))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         conteudoPanelLayout.setVerticalGroup(
             conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(conteudoPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(16, 16, 16)
                 .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelRegiao)
-                    .addComponent(fieldRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerarRelatorioRegiao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(fieldHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerarRelatorioHospital))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(conteudoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGerarRelatorio))
+                .addComponent(btnGerarRelatorioSintomas))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,34 +237,86 @@ public class GerarRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        Menu menu = new Menu(true);
         menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-        this.setVisible(false);
+        menu.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void fieldRegiaoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_fieldRegiaoInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldRegiaoInputMethodTextChanged
-
     private void formInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_formInputMethodTextChanged
- 
+
     }//GEN-LAST:event_formInputMethodTextChanged
 
     private void listSintomasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSintomasMouseClicked
-        btnGerarRelatorio.setEnabled(true);
+        btnGerarRelatorioSintomas.setEnabled(true);
     }//GEN-LAST:event_listSintomasMouseClicked
 
-    private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
-        if ("".equals(fieldRegiao.getText()) || "".equals(fieldHospital.getText())) {
-            JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
-        } else {
-            
-        }
-    }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+    private Date setDateRelatório() {
+        return Calendar.getInstance().getTime();
+    }
 
-    
+    private void btnGerarRelatorioSintomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioSintomasActionPerformed
+        Relatorio relatorio = new Relatorio("Sintomas", (String) listSintomas.getSelectedValue(), setDateRelatório());
+        String message = "Quantidade de pacientes com o sintoma " + listSintomas.getSelectedValue() + ": " + relatorio.getValor();
+        JOptionPane.showMessageDialog(this, message, "Relatório", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnGerarRelatorioSintomasActionPerformed
+
+
+    private void btnGerarRelatorioRegiaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioRegiaoActionPerformed
+        Relatorio relatorio = new Relatorio("Regiao", (String) cmbRegiao.getSelectedItem(), setDateRelatório());
+        String message = "Quantidade de pacientes com na região " + (String) cmbRegiao.getSelectedItem() + ": " + relatorio.getValor();
+        JOptionPane.showMessageDialog(this, message, "Relatório", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnGerarRelatorioRegiaoActionPerformed
+
+    private void btnGerarRelatorioHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioHospitalActionPerformed
+        Relatorio relatorio = new Relatorio("Hospitais", (String) cmbHospital.getSelectedItem(), setDateRelatório());
+        String message = "Quantidade de profissionais no hospital" + (String) cmbHospital.getSelectedItem() + ": " + relatorio.getValor();
+        JOptionPane.showMessageDialog(this, message, "Relatório", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnGerarRelatorioHospitalActionPerformed
+
+    private void gerarRegiao() {
+        DefaultComboBoxModel<String> regiaoModel = new DefaultComboBoxModel<>();
+        ArrayList<String> elementos = new ArrayList<>();
+
+        for (Paciente item : Login.pacientesInstanciados) {
+            if (!elementos.contains(item.getEstado())) {
+                regiaoModel.addElement(item.getEstado());
+                elementos.add(item.getEstado());
+            }
+        }
+        cmbRegiao.setModel(regiaoModel);
+        cmbRegiao.updateUI();
+    }
+
+    private void gerarHospitais() {
+        DefaultComboBoxModel<String> hospitalModel = new DefaultComboBoxModel<>();
+        ArrayList<String> elementos = new ArrayList<>();
+
+        for (EquipeMedica item : Login.equipeMedicasInstanciados) {
+            if (!elementos.contains(item.getCodigoLocalTrabalho())) {
+                hospitalModel.addElement(item.getCodigoLocalTrabalho());
+                elementos.add(item.getCodigoLocalTrabalho());
+            }
+        }
+        cmbHospital.setModel(hospitalModel);
+        cmbHospital.updateUI();
+
+    }
+
+    private void gerarSintomas() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        ArrayList<String> elementos = new ArrayList<>();
+
+        int i = 0;
+        for (String item : CoronaApp.sintomasGerais) {
+            if (!elementos.contains(item)) {
+                model.addElement(item);
+                elementos.add(item);
+            }
+        }
+        listSintomas.setModel(model);
+        listSintomas.updateUI();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -252,16 +345,17 @@ public class GerarRelatorio extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGerarRelatorio;
+    private javax.swing.JButton btnGerarRelatorioHospital;
+    private javax.swing.JButton btnGerarRelatorioRegiao;
+    private javax.swing.JButton btnGerarRelatorioSintomas;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cmbHospital;
+    private javax.swing.JComboBox<String> cmbRegiao;
     private javax.swing.JPanel conteudoPanel;
-    private javax.swing.JTextField fieldHospital;
-    private javax.swing.JTextField fieldRegiao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

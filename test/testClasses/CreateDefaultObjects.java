@@ -24,7 +24,7 @@ public class CreateDefaultObjects {
         login.setLocationRelativeTo(null);
         Sintomas sintomas1 = new Sintomas();
         sintomas1.addSintoma(new String[]{"Febre", "Tosse"});
-        final Paciente paciente1 = new Paciente("Estável", sintomas1, 0, "Ariel", "silva@gmail.com", "111.111.111-11", "(011)12237-6058", 0, "Itália", "Limeira", "Sãi Paulo", "Brasil", "1234");
+        final Paciente paciente1 = new Paciente("Estável", sintomas1, 0, "Ariel", "silva@gmail.com", "111.111.111-11", "(011)12237-6058", 0, "Itália", "Limeira", "São Paulo", "Brasil", "1234");
         
         Sintomas sintomas2 = new Sintomas();
         sintomas2.addSintoma(new String[] {"Febre","Dificuldade em respirar", "Dor de garganta", "Cansaço"});
