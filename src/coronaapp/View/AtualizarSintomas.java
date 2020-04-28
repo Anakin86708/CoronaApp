@@ -52,7 +52,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         if (sintomas != null) {
             i = 0;
             for (String item : arraySintomas) {
-                boolean contemSintoma = sintomas.getSintomasApresentados().contains(item);
+                boolean contemSintoma = sintomas.getSintomasApresentadosList().contains(item);
                 listCheckBoxsSintomas.get(i).setSelected(contemSintoma);
                 i++;
             }
@@ -232,7 +232,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
             // Caso em que está sendo feito o cadastro
             sintomas = new Sintomas();
             createSintomasFromCheckBox();
-            if (sintomas.getSintomasApresentados().isEmpty() && !equipeMedicaBox.isSelected()) {
+            if (sintomas.getSintomasApresentadosList().isEmpty() && !equipeMedicaBox.isSelected()) {
                 JOptionPane.showMessageDialog(this, "Você não possui sintomas relacionados ao Covid-19", "Não há sintomas", JOptionPane.INFORMATION_MESSAGE);
                 backLogin();
             } else {
