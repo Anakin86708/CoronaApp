@@ -1,4 +1,5 @@
 package coronaapp;
+
 import java.util.ArrayList;
 
 public class Paciente extends Pessoa {
@@ -30,6 +31,7 @@ public class Paciente extends Pessoa {
         this.prioridade = prioridade;
         this.status = status;
         this.sintomas = sintomas;
+        listaHistoricoMedico = new ArrayList<>();
     }
 
     public Sintomas getSintomas() {
@@ -60,9 +62,8 @@ public class Paciente extends Pessoa {
         return listaHistoricoMedico;
     }
 
-    public void setListaHistoricoMedico(ArrayList<HistoricoMedico> listaHistoricoMedico) {
-        this.listaHistoricoMedico = listaHistoricoMedico;
+    public void setListaHistoricoMedico(HistoricoMedico listaHistoricoMedico) {
+        this.listaHistoricoMedico.add(listaHistoricoMedico);
     }
 
-    
 }
