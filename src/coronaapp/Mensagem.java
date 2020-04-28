@@ -1,5 +1,8 @@
 package coronaapp;
 
+import static coronaapp.View.Mensagens.mensagens;
+import static coronaapp.View.Login.equipeMedicasInstanciados;
+import static coronaapp.View.Login.pacientesInstanciados;
 import java.util.Date;
 
 public class Mensagem {
@@ -47,9 +50,26 @@ public class Mensagem {
         this.idDestinatario = idDestinatario;
     }
 
-    @Override
-    public String toString() {
-        return "Mensagem{" + "data=" + data + ", texto=" + texto + ", idRemetente=" + idRemetente + ", idDestinatario=" + idDestinatario + '}';
+    public String toString(boolean ver) {
+        String textoItemMensagem = null;
+        if(!ver){
+            for(EquipeMedica em : equipeMedicasInstanciados){
+                if(this.getRemetente() == em.getIdPessoa()){
+                    String nomeRemetente = em.getNome();
+                    textoItemMensagem = "Data: "+this.getData()+" Remetente: "+nomeRemetente+" Texto: "+this.getTexto();
+                    break;
+                }
+            }
+        } else {
+            for(Paciente p : pacientesInstanciados){
+                if(this.getRemetente() == p.getIdPessoa()){
+                    String nomeRemetente = p.getNome();
+                    textoItemMensagem = "Data: "+this.getData()+" Remetente: "+nomeRemetente+" Texto: "+this.getTexto();
+                    break;
+                }
+            }
+        }
+        return textoItemMensagem;
     }
     
 }

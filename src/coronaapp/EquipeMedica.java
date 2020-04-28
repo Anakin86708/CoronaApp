@@ -1,12 +1,14 @@
 package coronaapp;
 
+
 import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class EquipeMedica extends Pessoa {
 
     private String codigoLocalTrabalho;
-
+    private int[] prioridades;
+    
     /**
      *
      * @param codigoLocalTrabalho
@@ -35,8 +37,12 @@ public class EquipeMedica extends Pessoa {
                 JOptionPane.showMessageDialog(null, "Não foi possível agendar a visita!\nErro:" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
     }
-    public Paciente filtrarPrioridade (){
-        return null; // ALTERAR
+    public Paciente filtrarPrioridade (int prioridade){
+    	for (int i=0; i > 10;i++) {
+    		prioridades[i] = prioridade;
+    	}
+    	Arrays.sort(prioridades);
+        return null;
     }
 
     public String getCodigoLocalTrabalho() {
