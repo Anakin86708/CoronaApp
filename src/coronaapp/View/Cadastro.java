@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class Cadastro extends javax.swing.JFrame {
 
     private String nome, email, cpf, telefone, bairro, cidade, estado, pais, senha;
+    private String localTrabalho = null;
     private Paciente paciente = null;
     private EquipeMedica equipeMedica = null;
     private Sintomas sintoma = null;
@@ -60,6 +61,7 @@ public class Cadastro extends javax.swing.JFrame {
         initComponents();
         this.equipeMedica = equipeMedica;
         this.menu = menu;
+        this.localTrabalho = equipeMedica.getCodigoLocalTrabalho();
         //checkEquipeMedica.setEnabled(false);
         btnEnviar.setText("Atualizar");
         updateTextbox();
@@ -453,7 +455,7 @@ public class Cadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtEstado.getText()) || "".equals(txtNome.getText()) || "".equals(txtPais.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(txtSenha.getPassword())) {
+        if ("".equals(formatedCPF.getText()) || "".equals(txtBairro.getText()) || "".equals(txtCidade.getText()) || "".equals(txtEstado.getText()) || "".equals(txtNome.getText()) || "".equals(txtPais.getText()) || "".equals(txtEmail.getText()) || "".equals(formatedTelefone.getText()) || "".equals(new String(txtSenha.getPassword()))) {
             JOptionPane.showMessageDialog(topPanel, "Preencha todas as informações!", "Valores inválidos", JOptionPane.ERROR_MESSAGE);
         } else {
             // Com base na checkBox cria um novo paciente ou equipe m�dica
@@ -461,12 +463,13 @@ public class Cadastro extends javax.swing.JFrame {
             try {
                 int id = Login.equipeMedicasInstanciados.size() + Login.pacientesInstanciados.size();
                 if (checkEquipeMedica.isSelected()) {
-                    String localTrabalho = null;
                     String regex = "\\w{2}\\d{6}"; // Regex para match com o local de trabalho
-                    do {                        
-                        localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
-                    } while (!localTrabalho.matches(regex));
-                    
+                    if (localTrabalho == null) {
+                        do {
+                            localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                        } while (!localTrabalho.matches(regex));
+                    }
+
                     equipeMedica = new EquipeMedica(localTrabalho, id, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
