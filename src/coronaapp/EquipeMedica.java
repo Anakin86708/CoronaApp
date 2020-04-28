@@ -3,7 +3,8 @@ package coronaapp;
 public class EquipeMedica extends Pessoa {
 
     private String codigoLocalTrabalho;
-
+    private int[] prioridades;
+    
     /**
      *
      * @param codigoLocalTrabalho
@@ -35,8 +36,12 @@ public class EquipeMedica extends Pessoa {
     public void agendarVisita (char data, int horario){
         
     }
-    public Paciente filtrarPrioridade (){
-        return null; // ALTERAR
+    public Paciente filtrarPrioridade (int prioridade){
+    	for (int i=0; i > 10;i++) {
+    		prioridades[i] = prioridade;
+    	}
+    	Arrays.sort(prioridades);
+        return null;
     }
 
     public String getCodigoLocalTrabalho() {
