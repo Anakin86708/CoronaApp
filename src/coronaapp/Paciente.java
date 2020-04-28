@@ -25,7 +25,19 @@ public class Paciente extends Pessoa {
      * @param pais
      * @param senha
      */
-    public Paciente(String status, Sintomas sintomas, int idPessoa, String nome, String email, String cpf, String telefone, int idioma, String bairro, String cidade, String estado, String pais, String senha) {
+    public Paciente(String status,
+            Sintomas sintomas,
+            int idPessoa,
+            String nome,
+            String email,
+            String cpf,
+            String telefone,
+            int idioma,
+            String bairro,
+            String cidade,
+            String estado,
+            String pais,
+            String senha) {
         super(idPessoa, nome, email, cpf, telefone, idioma, bairro, cidade, estado, pais, senha);
         this.status = status;
         this.sintomas = sintomas;
