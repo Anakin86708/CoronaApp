@@ -5,6 +5,7 @@
  */
 package coronaapp.View;
 
+import coronaapp.CoronaApp;
 import coronaapp.Sintomas;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -24,7 +25,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
     Menu menu = null;
     JCheckBox equipeMedicaBox = null;
 
-    private final String[] arraySintomas = {"Febre", "Dificuldade em respirar", "Tosse", "Dor de garganta", "Cansaço", "Falta de ar", "Dor no corpo"};
+    private final String[] arraySintomas = new CoronaApp().sintomasGerais;;
 
     public AtualizarSintomas(Menu menu, Sintomas sintomas) {
         initComponents();
@@ -51,7 +52,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
         if (sintomas != null) {
             i = 0;
             for (String item : arraySintomas) {
-                boolean contemSintoma = sintomas.getSintomasApresentados().contains(item);
+                boolean contemSintoma = sintomas.getSintomasApresentadosList().contains(item);
                 listCheckBoxsSintomas.get(i).setSelected(contemSintoma);
                 i++;
             }
@@ -231,7 +232,7 @@ public class AtualizarSintomas extends javax.swing.JFrame {
             // Caso em que está sendo feito o cadastro
             sintomas = new Sintomas();
             createSintomasFromCheckBox();
-            if (sintomas.getSintomasApresentados().isEmpty() && !equipeMedicaBox.isSelected()) {
+            if (sintomas.getSintomasApresentadosList().isEmpty() && !equipeMedicaBox.isSelected()) {
                 JOptionPane.showMessageDialog(this, "Você não possui sintomas relacionados ao Covid-19", "Não há sintomas", JOptionPane.INFORMATION_MESSAGE);
                 backLogin();
             } else {

@@ -34,9 +34,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Paciente p) {
         initComponents();
         this.paciente = p;
-
         configureView(false);
-        nomeLabel.setText("Olá, " + paciente.getNome());
+        nomeLabel.setText("Olá, " + paciente.getNome() + "! Gravidade: " + String.format("%.2f%%", paciente.getPrioridade()));
     }
 
     public Menu(EquipeMedica em) {
@@ -348,7 +347,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensMedicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensMedicasActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(true);
+            Mensagens mensagens = new Mensagens(this, true, equipeMedica);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -379,7 +378,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnMensagensPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensagensPacienteActionPerformed
         try {
-            Mensagens mensagens = new Mensagens(false);
+            Mensagens mensagens = new Mensagens(this, false, paciente);
             mensagens.setVisible(true);
             mensagens.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -390,7 +389,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         try {
-            GerarRelatorio gerarRelatorio = new GerarRelatorio();
+            GerarRelatorio gerarRelatorio = new GerarRelatorio(this,equipeMedica);
             gerarRelatorio.setVisible(true);
             gerarRelatorio.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -400,7 +399,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnMarcarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarVisitaActionPerformed
-        // TODO add your handling code here:
+        AgendarVisita visita = new AgendarVisita(this, equipeMedica);
+        visita.setLocationRelativeTo(this);
+        this.setVisible(false);
+        visita.setVisible(true);
     }//GEN-LAST:event_btnMarcarVisitaActionPerformed
 
     private void messageError(Exception e) throws HeadlessException {

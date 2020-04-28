@@ -5,6 +5,14 @@
  */
 package coronaapp.View;
 
+import coronaapp.EquipeMedica;
+import coronaapp.Mensagem;
+import coronaapp.Paciente;
+import coronaapp.Sintomas;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,14 +21,44 @@ import javax.swing.JOptionPane;
  */
 public class Mensagens extends javax.swing.JFrame {
     
-    private boolean equipeMedica;
 
-    /**
-     * Creates new form Mensagens
-     */
-    public Mensagens(boolean equipeMedica) {
-        initComponents();
+    private boolean isEquipeMedica;
+    private Paciente paciente = null;
+    private EquipeMedica equipeMedica = null;
+    private Menu menu = null;
+    public static List<Mensagem> mensagens = new ArrayList<Mensagem>();
+    private DefaultListModel textosMensagens = new DefaultListModel();
+            
+    public Mensagens(Menu menu,boolean isEquipeMedica, EquipeMedica equipeMedica) {
+        initComponents();        
         this.equipeMedica = equipeMedica;
+        this.isEquipeMedica = isEquipeMedica;
+        Login login = new Login();
+        if(isEquipeMedica){
+            for(Mensagem msg : mensagens){
+                if(msg.getDestinatario() == this.equipeMedica.getIdPessoa()){
+                    textosMensagens.addElement(msg.toString(true));
+                    break;
+                }
+            }
+        }
+        this.menu = menu;
+    }
+    
+    public Mensagens(Menu menu, boolean isEquipeMedica, Paciente paciente) {
+        initComponents();
+        this.paciente = paciente;
+        this.isEquipeMedica = isEquipeMedica;
+        this.menu = menu;
+        Login login = new Login();
+        if(!isEquipeMedica){
+            for(Mensagem msg : mensagens){
+                if(msg.getDestinatario() == paciente.getIdPessoa()){
+                    textosMensagens.addElement(msg.toString(false));
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -32,6 +70,8 @@ public class Mensagens extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         topPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
@@ -41,6 +81,28 @@ public class Mensagens extends javax.swing.JFrame {
         btnExcluirMensagem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMensagens = new javax.swing.JList<>();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,11 +171,7 @@ public class Mensagens extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        listMensagens.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listMensagens.setModel(textosMensagens);
         jScrollPane1.setViewportView(listMensagens);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,7 +205,6 @@ public class Mensagens extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // É preciso alterar o bool para o valor correto posteriormente
-        Menu menu = new Menu(this.equipeMedica);
         menu.setVisible(true);
         menu.setLocationRelativeTo(this);
         this.setVisible(false);
@@ -158,7 +215,14 @@ public class Mensagens extends javax.swing.JFrame {
         if (selecionado != -1) {
             int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagem selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ans == JOptionPane.YES_OPTION) {
-                //listMensagens.remove(selecionado);
+                String msgSelecionada = listMensagens.getSelectedValue();
+                for(Mensagem msg : mensagens){
+                    if(msg.toString(this.isEquipeMedica).equals(msgSelecionada)){
+                        mensagens.remove(msg);
+                        break;
+                    }
+                }
+                textosMensagens.removeElement(msgSelecionada);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
@@ -166,7 +230,48 @@ public class Mensagens extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirMensagemActionPerformed
 
     private void btnNovaMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaMensagemActionPerformed
-        // TODO add your handling code here:
+        int idRemetente = 0;
+        Login login = new Login();
+        List<String> nomes = new ArrayList<String>();
+        if(this.isEquipeMedica){
+            idRemetente = this.equipeMedica.getIdPessoa();
+            for(Paciente p : login.pacientesInstanciados){
+                nomes.add(p.getNome()); 
+            }
+        }
+        else{
+            idRemetente = this.paciente.getIdPessoa();
+            for(EquipeMedica e : login.equipeMedicasInstanciados){
+                nomes.add(e.getNome()); 
+            }
+        }
+        String nomeDestinatario = (String)JOptionPane.showInputDialog(this,"Selecione o Destinatario:","Destinatário:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
+        int idDestinatario = 0;
+        if(this.isEquipeMedica){
+            for(Paciente p : login.pacientesInstanciados){
+                if(nomeDestinatario.equals(p.getNome())){
+                    idDestinatario = p.getIdPessoa();
+                    break;
+                }
+            }
+        } else {
+            for(EquipeMedica e : login.equipeMedicasInstanciados){
+                if(nomeDestinatario.equals(e.getNome())){
+                    idDestinatario = e.getIdPessoa();
+                    break;
+                }
+            }
+        }
+        String msg = JOptionPane.showInputDialog(this, "Digite sua mensagem: ");
+        if(msg.trim().isEmpty()){
+           
+        }
+        else{
+            Date data = new Date();
+            Mensagem mensagem = new Mensagem(data,msg,idRemetente,idDestinatario);
+            this.mensagens.add(mensagem);
+            JOptionPane.showMessageDialog(this, "Mensagem enviada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
     /**
@@ -209,6 +314,8 @@ public class Mensagens extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirMensagem;
     private javax.swing.JButton btnNovaMensagem;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> listMensagens;

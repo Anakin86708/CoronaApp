@@ -459,21 +459,28 @@ public class Cadastro extends javax.swing.JFrame {
             // Com base na checkBox cria um novo paciente ou equipe m�dica
             updateVariables();
             try {
+                int id = Login.equipeMedicasInstanciados.size() + Login.pacientesInstanciados.size();
                 if (checkEquipeMedica.isSelected()) {
-                    String localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
-                    equipeMedica = new EquipeMedica(localTrabalho, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    String localTrabalho = null;
+                    String regex = "\\w{2}\\d{6}"; // Regex para match com o local de trabalho
+                    do {                        
+                        localTrabalho = JOptionPane.showInputDialog(this, "Digite o código de seu local de trabalho: ");
+                    } while (!localTrabalho.matches(regex));
+                    
+                    equipeMedica = new EquipeMedica(localTrabalho, id, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(equipeMedica);
                 } else {
-                    paciente = new Paciente("", sintoma, 0, nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
+                    paciente = new Paciente("", sintoma, Login.pacientesInstanciados.size(), nome, email, cpf, telefone, cmbIdioma.getSelectedIndex(), bairro, cidade, estado, pais, senha);
                     menu = new Menu(paciente);
                 }
+                JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                menu.setVisible(true);
+                menu.setLocationRelativeTo(this);
+                this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Não foi possível reazizar esta ação!\nErro:" + e.getMessage(), "Erro do executar ação", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "Dados registrados com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(this);
-            this.dispose();
+
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
