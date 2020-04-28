@@ -43,7 +43,7 @@ public class Historico extends javax.swing.JFrame {
         this.consultarHistorico = consultarHistorico;
         medicoPanel.setVisible(this.isEquipeMedica);
         setInformacoesPaciente(p);
-        
+        listarHistorico();
     }
     
     
@@ -73,23 +73,32 @@ public class Historico extends javax.swing.JFrame {
         DefaultListModel<String> listaExame = new DefaultListModel<String>();
         
         // adicionando os elementos às DefaultLists
-        for(HistoricoMedico historico : this.paciente.getListaHistoricoMedico()){
-            listaData.addElement(historico.getData().toString());
-        }
-        for(HistoricoMedico historico : this.paciente.getListaHistoricoMedico()){
-            listaDiagnostico.addElement(historico.getDiagnostico());
-        }
-        for(HistoricoMedico historico : this.paciente.getListaHistoricoMedico()){
-            listaMedicacao.addElement(historico.getMedicacao());
-        }
-        for(HistoricoMedico historico : this.paciente.getListaHistoricoMedico()){
-            listaExame.addElement(historico.getExame());
+        try {
+            for (HistoricoMedico historico : this.paciente.getListaHistoricoMedico()) {
+                listaData.addElement(historico.getData().toString());
+            }
+            for (HistoricoMedico historico : this.paciente.getListaHistoricoMedico()) {
+                listaDiagnostico.addElement(historico.getDiagnostico());
+            }
+            for (HistoricoMedico historico : this.paciente.getListaHistoricoMedico()) {
+                listaMedicacao.addElement(historico.getMedicacao());
+            }
+            for (HistoricoMedico historico : this.paciente.getListaHistoricoMedico()) {
+                listaExame.addElement(historico.getExame());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Paciente ainda não possui histórico", "Não há histórico",JOptionPane.WARNING_MESSAGE);
         }
         // adicionando itens à lista
         listData.setModel(listaData);
         listDiagnostico.setModel(listaDiagnostico);
         listMedicacao.setModel(listaMedicacao);
         listExame.setModel(listaExame);
+        
+        listData.updateUI();
+        listDiagnostico.updateUI();
+        listMedicacao.updateUI();
+        listExame.updateUI();
     }
 
     /**
@@ -429,6 +438,7 @@ public class Historico extends javax.swing.JFrame {
         AdicionarHistorico adicionarHistorico = new AdicionarHistorico(this.paciente, this);
         adicionarHistorico.setVisible(true);
         adicionarHistorico.setLocationRelativeTo(this);
+        listarHistorico();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
@@ -511,4 +521,5 @@ public class Historico extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel3;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
+
 }
