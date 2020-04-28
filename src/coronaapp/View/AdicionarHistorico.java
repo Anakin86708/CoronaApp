@@ -16,22 +16,24 @@ import java.util.ArrayList;
  * @author silva
  */
 public class AdicionarHistorico extends javax.swing.JFrame {
-    
+
     private HistoricoMedico historicoMedico;
     private ArrayList<HistoricoMedico> listaHistoricoMedico;
     private Paciente paciente;
     private Historico interfaceHistorico;
     private static int idHistorico = 1;
+
     /**
      * Creates new form Login
+     *
      * @param paciente
      * @param historico
      */
     public AdicionarHistorico(Paciente paciente, Historico historico) {
+        initComponents();
         listaHistoricoMedico = paciente.getListaHistoricoMedico();
         this.paciente = paciente;
         this.interfaceHistorico = historico;
-        initComponents();
     }
 
     /**
@@ -217,14 +219,12 @@ public class AdicionarHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAdicionarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarHistoricoActionPerformed
-        if(
-            "".equals(txtDiagnostico.getText()) 
-            || "".equals(spinnerData.getValue())  
-            || "".equals(txtMedicacao.getText())
-            || "".equals(txtExame.getText())
-            ){
+        if ("".equals(txtDiagnostico.getText())
+                || "".equals(spinnerData.getValue())
+                || "".equals(txtMedicacao.getText())
+                || "".equals(txtExame.getText())) {
             JOptionPane.showMessageDialog(this, "Preencha todas as informações", "Valores inválidos", JOptionPane.WARNING_MESSAGE);
-        }else{
+        } else {
             // data
             Date data = (Date) spinnerData.getValue();
             // outros atributos: diagnóstico, medicação e exame
@@ -234,12 +234,11 @@ public class AdicionarHistorico extends javax.swing.JFrame {
             // criando histórico médico
             HistoricoMedico historico = new HistoricoMedico(idHistorico, diagnostico, data, medicacao, exame);
             // adicionado à lista de histórico médico
-            listaHistoricoMedico = new ArrayList<>();
-            // erro na lista de historico
-            listaHistoricoMedico.add(historico);
+            paciente.setListaHistoricoMedico(historico);
             interfaceHistorico.setVisible(true);
             interfaceHistorico.setLocationRelativeTo(this);
             this.setVisible(false);
+            interfaceHistorico.listarHistorico();
             idHistorico++;
         }
     }//GEN-LAST:event_btnAdicionarHistoricoActionPerformed
@@ -263,16 +262,16 @@ public class AdicionarHistorico extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AdicionarHistorico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         /* Create and display the form */
-        /*
+ /*
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new AdicionarHistorico().setVisible(true);
             }
         });
-        */
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
