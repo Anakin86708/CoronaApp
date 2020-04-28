@@ -48,9 +48,7 @@ public class AdicionarHistorico extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtDiagnostico = new javax.swing.JTextField();
-        spinnerDia = new javax.swing.JSpinner();
-        spinnerMes = new javax.swing.JSpinner();
-        spinnerAno = new javax.swing.JSpinner();
+        spinnerData = new javax.swing.JSpinner();
         txtMedicacao = new javax.swing.JTextField();
         txtExame = new javax.swing.JTextField();
         topPanel3 = new javax.swing.JPanel();
@@ -79,6 +77,8 @@ public class AdicionarHistorico extends javax.swing.JFrame {
 
         jLabel10.setText("Diagnóstico:");
 
+        spinnerData.setModel(new javax.swing.SpinnerDateModel());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -86,7 +86,7 @@ public class AdicionarHistorico extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(274, Short.MAX_VALUE)
                         .addComponent(btnAdicionarHistorico))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -99,14 +99,10 @@ public class AdicionarHistorico extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDiagnostico)
                             .addComponent(txtMedicacao)
+                            .addComponent(txtExame)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(spinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(spinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtExame))))
+                                .addComponent(spinnerData, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -119,9 +115,7 @@ public class AdicionarHistorico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(spinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -221,19 +215,14 @@ public class AdicionarHistorico extends javax.swing.JFrame {
     private void btnAdicionarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarHistoricoActionPerformed
         if(
             "".equals(txtDiagnostico.getText()) 
-            || "".equals(spinnerDia.getValue())  
-            || "".equals(spinnerMes.getValue())
-            || "".equals(spinnerAno.getValue())
+            || "".equals(spinnerData.getValue())  
             || "".equals(txtMedicacao.getText())
             || "".equals(txtExame.getText())
             ){
             JOptionPane.showMessageDialog(this, "Preencha todas as informações", "Valores inválidos", JOptionPane.WARNING_MESSAGE);
         }else{
             // data
-            int dia = Integer.parseInt(spinnerDia.getValue().toString());
-            int mes = Integer.parseInt(spinnerMes.getValue().toString());
-            int ano = Integer.parseInt(spinnerAno.getValue().toString());
-            Date data = new Date(ano, mes, dia);
+            Date data = (Date) spinnerData.getValue();
             // outros atributos: diagnóstico, medicação e exame
             String diagnostico = txtDiagnostico.getText();
             String medicacao = txtMedicacao.getText();
@@ -241,9 +230,9 @@ public class AdicionarHistorico extends javax.swing.JFrame {
             // criando histórico médico
             HistoricoMedico historico = new HistoricoMedico(idHistorico, diagnostico, data, medicacao, exame);
             // adicionado à lista de histórico médico
-            
+            listaHistoricoMedico = new ArrayList<>();
             // erro na lista de historico
-            this.listaHistoricoMedico.add(historico);
+            listaHistoricoMedico.add(historico);
             interfaceHistorico.setVisible(true);
             interfaceHistorico.setLocationRelativeTo(this);
             this.setVisible(false);
@@ -291,9 +280,7 @@ public class AdicionarHistorico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner spinnerAno;
-    private javax.swing.JSpinner spinnerDia;
-    private javax.swing.JSpinner spinnerMes;
+    private javax.swing.JSpinner spinnerData;
     private javax.swing.JLabel titleLabel3;
     private javax.swing.JPanel topPanel;
     private javax.swing.JPanel topPanel3;

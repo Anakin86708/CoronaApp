@@ -95,7 +95,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="274" max="32767" attributes="0"/>
                                   <Component id="btnAdicionarHistorico" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -110,15 +110,11 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtDiagnostico" max="32767" attributes="0"/>
                                       <Component id="txtMedicacao" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="spinnerDia" min="-2" pref="53" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="spinnerMes" min="-2" pref="54" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="spinnerAno" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="txtExame" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="spinnerData" min="-2" pref="170" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="txtExame" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -137,9 +133,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="spinnerDia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="spinnerMes" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="spinnerAno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="spinnerData" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -188,11 +182,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDiagnostico">
                 </Component>
-                <Component class="javax.swing.JSpinner" name="spinnerDia">
-                </Component>
-                <Component class="javax.swing.JSpinner" name="spinnerMes">
-                </Component>
-                <Component class="javax.swing.JSpinner" name="spinnerAno">
+                <Component class="javax.swing.JSpinner" name="spinnerData">
+                  <Properties>
+                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                      <SpinnerModel initial="now" stepSize="5" type="date"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMedicacao">
                 </Component>
