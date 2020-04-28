@@ -142,7 +142,6 @@ public class Historico extends javax.swing.JFrame {
         lblCidade = new javax.swing.JLabel();
         medicoPanel = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CoronaApp - Inicial");
@@ -316,16 +315,12 @@ public class Historico extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setText("Excluir");
-
         javax.swing.GroupLayout medicoPanelLayout = new javax.swing.GroupLayout(medicoPanel);
         medicoPanel.setLayout(medicoPanelLayout);
         medicoPanelLayout.setHorizontalGroup(
             medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, medicoPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAdicionar)
                 .addGap(28, 28, 28))
         );
@@ -333,9 +328,7 @@ public class Historico extends javax.swing.JFrame {
             medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(medicoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(medicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnAdicionar))
+                .addComponent(btnAdicionar)
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -488,7 +481,6 @@ public class Historico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
