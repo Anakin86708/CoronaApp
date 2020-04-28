@@ -1,5 +1,7 @@
 package coronaapp;
 
+import java.util.Arrays;
+
 public class EquipeMedica extends Pessoa {
 
     private String codigoLocalTrabalho;
