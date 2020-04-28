@@ -9,6 +9,7 @@ import coronaapp.EquipeMedica;
 import coronaapp.Mensagem;
 import coronaapp.Paciente;
 import coronaapp.Sintomas;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -233,44 +234,46 @@ public class Mensagens extends javax.swing.JFrame {
         int idRemetente = 0;
         Login login = new Login();
         List<String> nomes = new ArrayList<String>();
-        if(this.isEquipeMedica){
-            idRemetente = this.equipeMedica.getIdPessoa();
-            for(Paciente p : login.pacientesInstanciados){
-                nomes.add(p.getNome()); 
-            }
-        }
-        else{
-            idRemetente = this.paciente.getIdPessoa();
-            for(EquipeMedica e : login.equipeMedicasInstanciados){
-                nomes.add(e.getNome()); 
-            }
-        }
-        String nomeDestinatario = (String)JOptionPane.showInputDialog(this,"Selecione o Destinatario:","Destinatário:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
-        int idDestinatario = 0;
-        if(this.isEquipeMedica){
-            for(Paciente p : login.pacientesInstanciados){
-                if(nomeDestinatario.equals(p.getNome())){
-                    idDestinatario = p.getIdPessoa();
-                    break;
+        try {
+            if (this.isEquipeMedica) {
+                idRemetente = this.equipeMedica.getIdPessoa();
+                for (Paciente p : login.pacientesInstanciados) {
+                    nomes.add(p.getNome());                    
+                }
+            } else {
+                idRemetente = this.paciente.getIdPessoa();
+                for (EquipeMedica e : login.equipeMedicasInstanciados) {
+                    nomes.add(e.getNome());                    
                 }
             }
-        } else {
-            for(EquipeMedica e : login.equipeMedicasInstanciados){
-                if(nomeDestinatario.equals(e.getNome())){
-                    idDestinatario = e.getIdPessoa();
-                    break;
+            String nomeDestinatario = (String) JOptionPane.showInputDialog(this, "Selecione o Destinatario:", "Destinatário:", JOptionPane.QUESTION_MESSAGE, null, nomes.toArray(), nomes.toArray()[0]);
+            int idDestinatario = 0;
+            if (this.isEquipeMedica) {
+                for (Paciente p : login.pacientesInstanciados) {
+                    if (nomeDestinatario.equals(p.getNome())) {
+                        idDestinatario = p.getIdPessoa();
+                        break;
+                    }
+                }
+            } else {
+                for (EquipeMedica e : login.equipeMedicasInstanciados) {
+                    if (nomeDestinatario.equals(e.getNome())) {
+                        idDestinatario = e.getIdPessoa();
+                        break;
+                    }
                 }
             }
-        }
-        String msg = JOptionPane.showInputDialog(this, "Digite sua mensagem: ");
-        if(msg.trim().isEmpty()){
-           
-        }
-        else{
-            Date data = new Date();
-            Mensagem mensagem = new Mensagem(data,msg,idRemetente,idDestinatario);
-            this.mensagens.add(mensagem);
-            JOptionPane.showMessageDialog(this, "Mensagem enviada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            String msg = JOptionPane.showInputDialog(this, "Digite sua mensagem: ");
+            if (msg.trim().isEmpty()) {
+                
+            } else {
+                Date data = new Date();
+                Mensagem mensagem = new Mensagem(data, msg, idRemetente, idDestinatario);
+                this.mensagens.add(mensagem);
+                JOptionPane.showMessageDialog(this, "Mensagem enviada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            }
+        } catch (HeadlessException headlessException) {
+            JOptionPane.showMessageDialog(this, "Erro ao enviar mensagem", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
