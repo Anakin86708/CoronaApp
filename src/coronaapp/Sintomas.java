@@ -13,7 +13,7 @@ public class Sintomas {
         this.sintomasApresentados = new ArrayList<>();
     }
 
-    public List<String> getSintomasApresentados() {
+    public List<String> getSintomasApresentadosList() {
         return sintomasApresentados;
     }
 
@@ -44,5 +44,9 @@ public class Sintomas {
         float possui = sintomasApresentados.size();
         
         gravidade = (float) (possui/total) * 100;
+    }
+    
+    public String[] getSintomasApresentadosArray(){
+        return (String[]) sintomasApresentados.toArray();
     }
 }
