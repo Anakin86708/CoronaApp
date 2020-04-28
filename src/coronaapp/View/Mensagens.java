@@ -34,16 +34,12 @@ public class Mensagens extends javax.swing.JFrame {
         this.equipeMedica = equipeMedica;
         this.isEquipeMedica = isEquipeMedica;
         Login login = new Login();
-        for(Mensagem msg : mensagens){
-            if(msg.getDestinatario() == equipeMedica.getIdPessoa()){
-                String nomeRemetente = null;
-                for(EquipeMedica em : login.equipeMedicasInstanciados){
-                    if(em.getIdPessoa()==msg.getRemetente()){
-                        nomeRemetente = em.getNome();
-                        break;
-                    }
+        if(isEquipeMedica){
+            for(Mensagem msg : mensagens){
+                if(msg.getDestinatario() == this.equipeMedica.getIdPessoa()){
+                    textosMensagens.addElement(msg.toString(true));
+                    break;
                 }
-                textosMensagens.addElement(msg.toString());
             }
         }
         this.menu = menu;
@@ -55,16 +51,12 @@ public class Mensagens extends javax.swing.JFrame {
         this.isEquipeMedica = isEquipeMedica;
         this.menu = menu;
         Login login = new Login();
-        for(Mensagem msg : mensagens){
-            if(msg.getDestinatario() == paciente.getIdPessoa()){
-                String nomeRemetente = null;
-                for(EquipeMedica em : login.equipeMedicasInstanciados){
-                    if(em.getIdPessoa()==msg.getRemetente()){
-                        nomeRemetente = em.getNome();
-                        break;
-                    }
+        if(!isEquipeMedica){
+            for(Mensagem msg : mensagens){
+                if(msg.getDestinatario() == paciente.getIdPessoa()){
+                    textosMensagens.addElement(msg.toString(false));
+                    break;
                 }
-                textosMensagens.addElement(msg.toString());
             }
         }
     }
@@ -223,7 +215,14 @@ public class Mensagens extends javax.swing.JFrame {
         if (selecionado != -1) {
             int ans = JOptionPane.showConfirmDialog(this, "Deseja excluir a mensagem selecionada?", "Remover mensagem", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ans == JOptionPane.YES_OPTION) {
-                mensagens.remove(selecionado);
+                String msgSelecionada = listMensagens.getSelectedValue();
+                for(Mensagem msg : mensagens){
+                    if(msg.toString(this.isEquipeMedica).equals(msgSelecionada)){
+                        mensagens.remove(msg);
+                        break;
+                    }
+                }
+                textosMensagens.removeElement(msgSelecionada);
             }
         } else {
             JOptionPane.showMessageDialog(this,"Selecione uma mensagem primeiro", "Remover mensagem", JOptionPane.ERROR_MESSAGE);
@@ -246,18 +245,18 @@ public class Mensagens extends javax.swing.JFrame {
                 nomes.add(e.getNome()); 
             }
         }
-        String destinatario = (String)JOptionPane.showInputDialog(this,"Selecione o Destinatario:","Destinatário:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
+        String nomeDestinatario = (String)JOptionPane.showInputDialog(this,"Selecione o Destinatario:","Destinatário:",JOptionPane.QUESTION_MESSAGE,null,nomes.toArray(),nomes.toArray()[0]);
         int idDestinatario = 0;
         if(this.isEquipeMedica){
             for(Paciente p : login.pacientesInstanciados){
-                if(destinatario.equals(p.getNome())){
+                if(nomeDestinatario.equals(p.getNome())){
                     idDestinatario = p.getIdPessoa();
                     break;
                 }
             }
         } else {
             for(EquipeMedica e : login.equipeMedicasInstanciados){
-                if(destinatario.equals(e.getNome())){
+                if(nomeDestinatario.equals(e.getNome())){
                     idDestinatario = e.getIdPessoa();
                     break;
                 }
@@ -271,6 +270,7 @@ public class Mensagens extends javax.swing.JFrame {
             Date data = new Date();
             Mensagem mensagem = new Mensagem(data,msg,idRemetente,idDestinatario);
             this.mensagens.add(mensagem);
+            JOptionPane.showMessageDialog(this, "Mensagem enviada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnNovaMensagemActionPerformed
 
